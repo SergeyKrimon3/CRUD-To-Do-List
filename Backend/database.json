@@ -1,0 +1,11 @@
+{
+    "tasks": [
+        {
+            "id": 1,
+            "title": "Lista Teste",
+            "description": "Lista de Tarefas",
+            "status": "pending",
+            "createdAt": "2025-05-26T12:00:00Z"
+        }
+    ]
+}
