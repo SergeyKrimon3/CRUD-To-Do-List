@@ -1,19 +1,121 @@
-
 // Custom Theming for Angular Material
-// For more information: https://material.angular.dev/guide/theming
+// For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
+@use './assets/styles/variables.scss' as v;
+@use './assets/styles/app-theme.scss' as theme; // Custom theme palette
+@use './assets/styles/mixins.scss' as mix;
+@use './assets/styles/scrollbar.scss';
+@use './assets/styles/common-classes.scss';
+@use './assets/styles/material-component.scss';
+@use "sass:color";
 
-html {
-  @include mat.theme((
-    color: (
-      theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$theme-primary: mat.m2-define-palette(theme.$app-primary);
+$theme-accent: mat.m2-define-palette(theme.$app-secondary);
+$theme-warn: mat.m2-define-palette(theme.$app-red);
+$theme-typography: mat.m2-define-typography-config($font-family: 'Glancyr');
+$theme-density: 0;
+@include mat.typography-hierarchy($theme-typography);
+
+$theme: mat.m2-define-light-theme((color: 
+    (
+        primary: $theme-primary,
+        accent: $theme-accent,
+        warn: $theme-warn,
+        use-system-variables: true
     ),
-    typography: Roboto,
-    density: 0,
-  ));
-}/* You can add global styles to this file, and also import other style files */
+    density: 0)
+);
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@include mat.core-theme($theme);
+
+html.light {
+    color-scheme: light;
+    --main-text: #{v.$darken};
+    --main-bg: #{v.$light-text};
+    --main-company-bg: #{v.$primary-300};
+    --main-company-bg-shade: #{v.$primary-shade-300};
+
+    //Material
+    --mat-menu-container-color: var(--main-bg) !important;
+    --mat-icon-color: var(--main-text) !important;
+    --mat-menu-item-icon-color: var(--main-text) !important;
+
+
+
+
+    --mat-checkbox-label-text-color: #8C8A97 !important;
+    --mat-sidenav-container-text-color: #8C8A97 !important;
+    --mdc-filled-button-label-text-color: var(--main-text) !important;
+    --main-input-placeholder: #1E2127 !important;
+    --mat-sidenav-content-background-color: #FFF !important;
+    --mat-select-placeholder-text-color: #1E2127 !important;
+    --mdc-dialog-container-color: #FFF !important;
+    --mat-expansion-header-text-color: #1E2127 !important;
+    --mat-menu-item-label-text-color: #1E2127 !important;
+    --mat-minimal-pseudo-checkbox-selected-checkmark-color: v.$primary-300 !important;
+    --mat-datepicker-calendar-container-background-color: #F9F9F9 !important;
+    --mat-datepicker-calendar-navigation-button-icon-color: #000 !important;
+    --mat-datepicker-calendar-header-text-color: #000 !important;
+}
+
+html.dark {
+    color-scheme: dark;
+    --main-text: #{v.$light-text};
+    --main-bg: #{v.$darken-shade};
+    --main-company-bg: #{v.$secondary-600};
+    --main-company-bg-shade: #{v.$secondary-shade-600};
+
+    //Material
+    --mat-menu-container-color: var(--main-bg) !important;
+    --mat-icon-color: var(--main-text) !important;
+    --mat-menu-item-icon-color: var(--main-text) !important;
+
+
+
+
+
+
+    --mat-checkbox-label-text-color: var(--main-text) !important;
+    --mat-sidenav-container-text-color: #8C8A97 !important;
+    --mdc-filled-button-label-text-color: var(--main-text) !important;
+    --main-input-placeholder: #FFF;
+    --mat-sidenav-content-background-color: #1E2127 !important;
+    --mat-select-placeholder-text-color: #FFF !important;
+    --mdc-dialog-container-color: #424242 !important;
+    --mat-expansion-header-text-color: #FFF !important;
+    --mat-menu-item-label-text-color: #FFF !important;
+    --mat-minimal-pseudo-checkbox-selected-checkmark-color: v.$primary-300 !important;
+    --mat-datepicker-calendar-container-background-color: #424242 !important;
+    --mat-datepicker-calendar-navigation-button-icon-color: #FFF !important;
+    --mat-datepicker-calendar-header-text-color: #FFF !important;
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    color: v.$light-text;
+    cursor: default;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    letter-spacing: 0px;
+    font-family: 'Glancyr', sans-serif !important;
+}

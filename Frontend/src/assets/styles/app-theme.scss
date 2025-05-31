@@ -1,0 +1,188 @@
+@use "sass:color";
+
+// Angular Material equal colors:
+$dark-primary-text: white;
+$dark-secondary-text: rgba(black, 0.54);
+$dark-disabled-text: rgba(black, 0.38);
+$dark-dividers: rgba(black, 0.12);
+$dark-focused: rgba(black, 0.12);
+$light-primary-text: white;
+$light-secondary-text: rgba(white, 0.7);
+$light-disabled-text: rgba(white, 0.5);
+$light-dividers: rgba(white, 0.12);
+$light-focused: rgba(white, 0.12);
+
+*[color="primary"] label, *[color="accent"] label {
+    color: $light-primary-text;
+}
+
+//https://materialpalettes.com/
+$app-primary: (
+    50: #f7fbe9,
+    100: #ecf5c7,
+    200: #e0efa3,
+    300: #d5e87f, //Primary
+    400: #cce264,
+    500: #c4dd4a,
+    600: #b8cb43,
+    700: #a7b53b,
+    800: #979e32,
+    900: #7c7824,
+    3500: color.adjust(#d5e87f, $lightness: -30%),
+    GL200: #e0efa3,
+    GR400: #d5e87f,
+    contrast: (
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $light-primary-text,
+        400: $light-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: $dark-primary-text,
+        A200: $dark-primary-text,
+        A400: $dark-primary-text,
+        A700: $light-primary-text,
+    )
+);
+
+$app-secondary: (
+    50: #dff5f9,
+    100: #b0e7f1,
+    200: #7dd7e7,
+    300: #49c7dc,
+    400: #23bbd4,
+    500: #01b0cc,
+    600: #00a0b9, //Secondary
+    700: #008c9f,
+    800: #007887,
+    900: #00565d,
+    contrast: (
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $light-primary-text,
+        400: $light-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: $dark-primary-text,
+        A200: $dark-primary-text,
+        A400: $dark-primary-text,
+        A700: $light-primary-text,
+    )
+);
+
+$app-red: (
+    50: #fceae8,
+    100: #f8c9c5,
+    200: #ffa7a7,
+    300: #ee8277,
+    400: #eb6759,
+    500: #D83333,
+    600: #D83333,
+    700: #e03c2e, //Red
+    800: #dd3327,
+    900: #d7241a,
+    A100: #ffffff,
+    A200: #ffd9d7,
+    A400: #ffa8a4,
+    A700: #c51162,
+    contrast: (
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $light-primary-text,
+        400: $light-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: $dark-primary-text,
+        A200: $dark-primary-text,
+        A400: $dark-primary-text,
+        A700: $light-primary-text,
+    )
+);
+
+$app-green: (
+    50: #ecfcea,
+    100: #D0F7CA,
+    200: #B1F2A7,
+    300: #92EC83,
+    400: #7AE869,
+    500: #63E44E,
+    600: #5BE147,
+    700: #51DD3D, //Green
+    800: #47D935,
+    900: #35D125,
+    A100: #ffffff,
+    A200: #DDFFDA,
+    A400: #AEFFA7,
+    A700: #97FF8D,
+);
+
+$app-blue: (
+    50: #e3f1fc,
+    100: #bbdcf9,
+    200: #90c7f6,
+    300: #66b1f2,
+    400: #46a1f0,
+    500: #2b91ed,
+    600: #2884df, //Blue
+    700: #2372cc,
+    800: #1f61ba,
+    900: #17439b,
+    contrast: (
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $light-primary-text,
+        400: $light-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: $dark-primary-text,
+        A200: $dark-primary-text,
+        A400: $dark-primary-text,
+        A700: $light-primary-text,
+    )
+);
+
+$app-yellow: (
+    50: #fef7e0,
+    100: #fdebb1,
+    200: #fcde7e,
+    300: #fbd249,
+    400: #fac61c, //Yellow
+    500: #f9bd00,
+    600: #faaf00,
+    700: #fa9c00,
+    800: #fa8b00,
+    900: #fa6a00,
+    3500: color.adjust(#fac61c, $lightness: -30%),
+    contrast: (
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $light-primary-text,
+        400: $light-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: $dark-primary-text,
+        A200: $dark-primary-text,
+        A400: $dark-primary-text,
+        A700: $light-primary-text,
+    )
+);

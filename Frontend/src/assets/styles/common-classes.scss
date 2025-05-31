@@ -1,0 +1,485 @@
+@use './variables.scss' as v;
+@use './mixins.scss' as mix;
+@use './scrollbar.scss';
+@use './app-theme.scss' as theme;
+
+// Utils
+.inline {
+    display: flex;
+    align-items: center;
+}
+
+.inline-end {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.between {
+    display: flex;
+    justify-content: space-between !important;
+}
+
+.to-point {
+    cursor: pointer;
+}
+
+mat-icon {
+    flex-shrink: 0 !important;
+}
+
+//Company bg
+.main-company-bg {
+    background-color: var(--main-company-bg);
+}
+
+//Align
+.align-end {
+    align-items: flex-end !important;
+}
+
+.align-base {
+    align-items: baseline !important;
+}
+
+.align-center {
+    align-items: center !important;
+}
+
+//Flex
+.flex {
+    display: flex;
+}
+
+.flex-0 {
+    flex: 0
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-2 {
+    flex: 2;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+//Pré-line
+p, span, strong, h1, h2 {
+    white-space: pre-line;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+//width
+.wth-100 {
+    width: 100%;
+}
+
+//Decoration
+.underline-text {
+    text-decoration: underline;
+}
+
+//Default Internal Pages
+.internal-page {
+    overflow-y: auto;
+    max-height: 100dvh;
+    height: 100dvh;
+    padding: 40px;
+
+    @include mix.mq("phone-wide", max) {
+        padding: 20px;
+    }
+}
+
+//Gap
+.gap-2 {
+    gap: 2px;
+}
+
+.gap-4 {
+    gap: 4px;
+}
+
+.gap-5 {
+    gap: 5px;
+}
+
+.gap-8 {
+    gap: 8px;
+}
+
+.gap-10 {
+    gap: 10px;
+}
+
+.gap-12 {
+    gap: 12px;
+}
+
+.gap-18 {
+    gap: 18px;
+}
+
+.gap-20 {
+    gap: 20px;
+}
+
+.gap-24 {
+    gap: 24px;
+}
+
+.gap-30 {
+    gap: 30px;
+}
+
+.gap-40 {
+    gap: 40px;
+}
+
+//Font-weight
+.fw-400 {
+    font-weight: 400;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.fw-700 {
+    font-weight: 700;
+}
+
+//Font-size
+.fs-11 {
+    font-size: 11px;
+}
+
+.fs-12 {
+    font-size: 12px;
+}
+
+.fs-13 {
+    font-size: 13px;
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
+.fs-16 {
+    font-size: 16px;
+}
+
+.fs-18 {
+    font-size: 18px;
+}
+
+.fs-21 {
+    font-size: 21px !important;
+}
+
+.fs-22 {
+    font-size: 22px !important;
+}
+
+//Input
+.input-container, .button-container {
+    position: relative;
+    padding-bottom: 16px;
+
+    ::-webkit-input-placeholder {
+        color: var(--main-input-placeholder);
+    }
+
+    :-moz-placeholder {
+        color: var(--main-input-placeholder);
+    }
+
+    label {
+        @extend .input-label;
+    }
+
+    &.input-icon {
+        .input {
+            padding-right: 40px;
+        }
+
+        .svg-icon, .calendar-position, .spinner-small {
+            position: absolute;
+            right: 16px;
+            top: 35px;
+            height: 24px;
+            width: 24px;
+            cursor: pointer;
+        }
+
+        mat-datepicker-toggle.calendar-icon {
+            position: absolute;
+            right: 10px;
+            top: -2px;
+
+            &.input-with-label {
+                top: 26px;
+            }
+
+            .calendar-2 {
+                right: 8px !important;
+                top: 8px !important;
+            }
+        }
+    }
+
+    span.error-hint, .length-hint {
+        position: absolute;
+        bottom: -6px;
+        right: 0;
+        font-size: 12px;
+        line-height: 24px;
+        color: v.$danger;
+    }
+
+    .length-hint {
+        color: v.$medium-tint;
+    }
+}
+
+.input-label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.input, .select, .custom-text-area {
+    border: 1px solid v.$light-shade;
+    padding: 13px;
+    height: 50px;
+    border-radius: 6px;
+    background-color: transparent;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--main-input-placeholder);
+
+    &.placeholder-dark::placeholder {
+        color: v.$dark !important;
+        font-weight: 600 !important;
+    }
+
+    &:read-only {
+        cursor: default;
+    }
+
+    &[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+
+    &[type=number] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+    }
+
+    ::-webkit-input-placeholder {
+        color: v.$medium-tint;
+    }
+
+    :-moz-placeholder {
+        color: v.$medium-tint;
+    }
+
+    &:focus:not(:read-only,:disabled) {
+        border-color: v.$primary-300;
+    }
+
+    &.ng-invalid.ng-touched:not(:read-only,:disabled) {
+        border-color: v.$danger;
+    }
+
+    &.input-border-danger, &.input-border-danger:not(:read-only, :disabled) {
+        border-color: v.$danger !important;
+    }
+
+    &.arrow-down {
+        ::ng-deep {
+            .mat-mdc-select-arrow-wrapper {
+                background-image: url('../icons/arrow-down.svg');
+                background-repeat: no-repeat;
+                filter: invert(39%) sepia(94%) saturate(2927%) hue-rotate(353deg) brightness(101%) contrast(103%);
+            }
+
+            .mat-mdc-select-arrow {
+                width: 22px !important;
+                opacity: 0 !important;
+            }
+        }
+    }
+
+    &.textarea {
+        scrollbar-color: v.$medium-tint #ffffff00;
+        overflow-y: auto;
+        resize: none;
+    } 
+}
+
+//Label
+label.label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    line-height: 16px;
+    color: var(--main-text);
+    font-size: 13px;
+}
+
+//Button
+.btn {
+    color: var(--main-text) !important;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    gap: 10px;
+    min-width: 157px;
+
+    // medium (default)
+    font-size: 14px;
+    padding: 12px 20px;
+    height: v.$input-medium;
+
+    @include mix.mq("phone-wide", max) {
+        min-width: 130px;
+    }
+
+    mat-icon {
+        min-width: 20px;
+        width: 20px;
+    }
+
+    ::ng-deep.svg-icon svg * {
+        stroke: v.$light-text;
+    }
+
+    &:disabled {
+        opacity: 0.3;
+        cursor: default;
+    }
+
+    &.small {
+        font-size: 13px;
+        padding: 8px 24px;
+        min-width: 96px;
+    }
+
+    &.large {
+        font-size: 16px;
+        padding: 16px 56px;
+        height: v.$input-large;
+    }
+
+    &.default {
+        background-color: var(--main-company-bg);
+
+        &:hover:not(:disabled), &.selected:not(:disabled) {
+            background-color: var(--main-company-bg-shade);
+        }
+    }
+
+    &.primary-tint {
+        background-color: v.$primary-tint-300;
+
+        &:hover:not(:disabled), &.selected:not(:disabled) {
+            opacity: 0.8;
+        }
+    }
+
+    &.danger-shade {
+        background-color: v.$danger-shade;
+    }
+
+    &.danger {
+        background-color: v.$danger;
+    }
+
+    &.blue-shade {
+        background-color: v.$blue-shade;
+    }
+
+    &.medium {
+        background-color: v.$medium;
+    }
+
+    &.outline {
+        background: transparent;
+        border: 1px solid v.$light-shade;
+        color: v.$medium;
+
+        &.primary:hover:not(:disabled) {
+            border-color: v.$primary-tint-300;
+            color: v.$primary-tint-300;
+            background: transparent;
+        }
+    }
+
+    &.outline-primary {
+        background: v.$light-text;
+        border: 1px solid v.$primary-tint-300;
+        color: v.$primary-300 !important;
+    }
+
+    &.loading {
+        pointer-events: none;
+    }
+
+    &.btn-white {
+        border: 1px solid v.$light-shade;
+        background-color: transparent;
+    }
+}
+
+.button-link {
+    overflow: hidden;
+    line-height: 24px;
+    font-size: 13px;
+    color: var(--main-text-dark);
+    cursor: pointer;
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(v.$medium, v.$medium);
+    background-size: 100% 1px, 0 1px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: all 300ms linear;
+
+    &:hover, &:focus {
+        background-size: 0 1px, 100% 1px;
+        color: var(--main-text-dark);
+    }
+
+    &.primary {
+        color: v.$primary-300;
+        background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)),
+        linear-gradient(v.$primary-300, v.$primary-300);
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "pageTitle.tasks": "Tarefas",
+    "pageTitle.login": "Login",
+    "account.title": "Painel Administrativo",
+    "account.login.title": "Inicie sua sessão",
+    "account.login.remember": "Lembrar",
+    "label.cpf": "CPF",
+    "label.password": "Senha",
+    "placeholder.cpf": "Insira seu cpf",
+    "placeholder.password": "Insira sua senha",
+    "button.login": "Acessar",
+    "button.pt": "Português",
+    "button.en": "Inglês",
+    "theme.light": "Modo Claro",
+    "theme.dark": "Modo escuro",
+    "errorHint.required": "Campo obrigatório"
+}

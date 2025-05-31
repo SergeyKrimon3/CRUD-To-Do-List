@@ -1,0 +1,141 @@
+@use '../../../../assets/styles/variables.scss' as v;
+@use '../../../../assets/styles/mixins.scss' as mix;
+
+.menu {
+    width: 240px;
+    padding: 32px 24px 40px 24px;
+    min-height: 100%;
+    height: auto;
+    color: v.$light-text;
+    overflow-y: auto;
+
+    @include mix.mq("phone-wide", max) {
+        width: 100vw;
+    }
+
+    .close-menu {
+        display: none;
+
+        @include mix.mq("tablet-wide", max) {
+            display: block;
+            cursor: pointer;
+            margin: -10px auto 20px 12px;
+        }
+    }
+
+    .menu-logo {
+        margin: 0 auto 0 16px;
+        height: 32px;
+
+        @include mix.iconSize(74px, true);
+    }
+
+    .panel-version {
+        font-weight: 500;
+        font-size: 12px;
+        margin-left: 16px;
+        color: red;
+    }
+
+    .menu-items {
+        padding: 32px 0;
+        border-bottom: 1px solid red;
+        min-height: 48px;
+        font-weight: 600;
+        font-size: 14px;
+        gap: 12px 0;
+
+        &.footer-menu {
+            margin-top: auto;
+            border-bottom: none !important;
+            padding: 0 !important;
+        }
+
+        .menu-item {
+            position: relative;
+            padding: 12px 28px 12px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 300ms ease-in-out;
+
+            .svg-icon {
+                margin-right: 16px;
+            }
+
+            &:hover, &.selected {
+                background: rgba($color: red, $alpha: 0.2);
+            }
+            
+            &.selected {
+                cursor: default;
+            }
+        }
+
+        .menu-buttons-container {
+            transition: background 300ms ease-in-out;
+            gap: 12px;
+
+            .menu-button.mdc-button.mat-mdc-button-base {
+                display: flex;
+                justify-content: flex-start;
+                min-height: 48px;
+                border: none;
+                color: transparent;
+                font-size: 16px;
+                padding: 12px 28px 12px 16px;
+                border-radius: 12px;
+                cursor: pointer;
+                background-color: transparent;
+
+                mat-icon {
+                    margin-right: 16px;
+                    @include mix.iconSize(22px, true);
+                }
+
+                &.activated {
+                    background: rgba($color: red, $alpha: 0.2);
+                    cursor: default;
+                }
+
+                &:hover, &:active {
+                    background: rgba($color: red, $alpha: 0.2);
+                }
+
+                ::ng-deep {
+                    .mat-mdc-button-persistent-ripple::before {
+                        background-color: transparent !important;
+                    }
+
+                    .mdc-button__label {
+                        color: var(--main-text);
+                        white-space: nowrap;
+                        font-size: 14px;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+
+    .user-container {
+        padding: 16px 16px 0 16px;
+
+        .inline {
+            margin-bottom: 8px;
+
+            .user-icon {
+                margin-right: 16px;
+            }
+
+            .user-type {
+                font-weight: 600;
+                font-size: 14px;
+            }
+        }
+
+        p {
+            font-weight: 500;
+            font-size: 12px;
+        }
+    }
+}

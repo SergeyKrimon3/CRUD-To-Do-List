@@ -1,0 +1,5 @@
+<div class="snackbar-container">
+    <img class="fill-icon" *ngIf="theme === 'error'" src="assets/images/close-circle-fill.svg" alt="error">
+    <img class="fill-icon" *ngIf="theme === 'success'" src="assets/images/tick-circle-fill.svg" alt="success">
+    <p class="primary-main-text">{{ message | translate }}</p>
+</div>

@@ -1,0 +1,111 @@
+@use '../../../assets/styles/variables.scss' as v;
+@use '../../../assets/styles/mixins.scss' as mix;
+@use '../../../assets/styles/common-classes.scss';
+@use '../../../assets/styles/material-component.scss';
+
+.full-height {
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+
+    @include mix.mq("tablet", max) {
+        padding: 28px !important;
+    }
+
+    @include mix.mq("phone", max) {
+        padding: 10px !important;
+    }
+
+    .form-container {
+        @include mix.mq("tablet", max) {
+            width: 100% !important;
+        }
+    }
+
+    .form {
+        width: 100%;
+        min-width: 416px;
+        margin: auto;
+        padding: 20px 20px;
+        cursor: default;
+
+        @include mix.mq("phone-small", max) {
+            min-width: 0px !important;
+        }
+
+        @include mix.mq("phone-wide", max) {
+            min-width: 0px !important;
+        }
+
+        .logo {
+            width: 120px;
+            margin-bottom: 30px;
+            object-fit: contain;
+        }
+
+        // Login
+        h1.company-login {
+            margin-bottom: 48px;
+        }
+
+        .login-options {
+            font-size: 13px;
+            color: v.$medium;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 4px 0 26px 0;
+        }
+
+        .btn.large {
+            width: 100%;
+
+            &.forgot {
+                margin-top: 34px;
+            }
+
+            &.reset {
+                margin-top: 24px;
+            }
+
+            &.success {
+                margin-top: 40px;
+            }
+        }
+
+        .title-font {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: var(--main-text-dark);
+            font-size: 16px;
+
+            &.forgot {
+                margin-bottom: 50px;
+            }
+
+            &.validation {
+                margin-bottom: 58px;
+            }
+
+            &.reset {
+                margin-bottom: 42px;
+            }
+        }
+    }
+}
+
+.reset-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.arrow-position {
+    position: relative;
+    right: 22px;
+    top: -12px;
+}

@@ -1,0 +1,102 @@
+@use './variables.scss' as v;
+@use './mixins.scss' as mix;
+@use './scrollbar.scss';
+@use './common-classes.scss';
+
+//Checkbox
+.mat-mdc-checkbox {
+    .mdc-checkbox__native-control:enabled~.mdc-checkbox__background {
+        border-color: v.$color-checkbox-disabled !important;
+        border-width: 1.5px !important;
+    }
+
+    .mdc-checkbox {
+        width: 20px !important;
+        height: 24px !important;
+    }
+
+    .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,
+    .mdc-checkbox .mdc-checkbox__native-control:enabled:focus:checked~.mdc-checkbox__background,
+    .mdc-checkbox .mdc-checkbox__native-control:enabled:focus:indeterminate~.mdc-checkbox__background {
+        border-color: var(--main-company-bg) !important;
+        background-color: var(--main-company-bg) !important;
+    }
+
+    .mdc-label {
+        color: var(--main-text-dark) !important;
+    }
+
+    .mdc-checkbox .mdc-checkbox__native-control:enabled~.mdc-checkbox__background .mdc-checkbox__checkmark {
+        color: v.$light-text;
+    }
+}
+.mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled~.mdc-checkbox__background .mdc-checkbox__checkmark {
+    top: 2px;
+    left: 2px;
+    width: 80%;
+}
+
+.mat-mdc-checkbox .mdc-checkbox__ripple {
+    background: transparent !important;
+}
+
+.mdc-checkbox__background {
+    height: 22px !important;
+    width: 22px !important;
+    border-radius: 7px !important;
+    border-color: v.$medium-tint;
+}
+
+.mat-mdc-checkbox-ripple {
+    top: 0px !important;
+    left: 4px !important;
+}
+
+.mdc-checkbox--disabled .mdc-checkbox__background {
+    border-color: rgba(v.$medium-tint, 0.3) !important;
+}
+
+//Spinner
+.mat-mdc-progress-spinner.spinner {
+    position: fixed;
+    z-index: 9999;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    zoom: 0.8;
+
+    circle {
+        stroke: var(--main-company-bg-shade);
+    }
+}
+
+.mat-mdc-progress-spinner.spinner-medium {
+    zoom: 0.4;
+    -moz-transform: scale(0.4) !important; //For Firefox
+    -moz-transform-origin: left top; // For Firefox
+
+    circle {
+        stroke: var(--main-company-bg-shade);
+    }
+
+    &.light-tint circle {
+        stroke: v.$light-text;
+    }
+}
+
+.mat-mdc-progress-spinner.spinner-small {
+    zoom: 0.2;
+    -moz-transform: scale(0.2) !important; //For Firefox
+    -moz-transform-origin: left top; // For Firefox
+
+    circle {
+        stroke: var(--main-company-bg-shade);
+    }
+
+    &.light-tint circle {
+        stroke: v.$light-text;
+    }
+}

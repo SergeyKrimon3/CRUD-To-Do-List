@@ -1,0 +1,42 @@
+<div class="full-height">
+    <form>
+        <div class="form login" [formGroup]="form">
+            <h1 class="company-login">
+                <span class="primary-main-text">{{ 'account.login.title' | translate }} </span>
+            </h1>
+
+            <div class="input-container">
+                <label class="label">{{ 'label.cpf' | translate }}</label>
+                <input type="text" formControlName="cpf" class="input"
+                    [placeholder]="'placeholder.cpf' | translate" mask="000.000.000-00" required>
+                <ng-container *ngIf="showError('cpf') && !form.get('cpf')?.value">
+                    <span class="error-hint" >{{ 'errorHint.required' | translate }}</span>
+                </ng-container>
+                <ng-container *ngIf="showError('cpf') && form.get('cpf')?.value && form.get('cpf')?.invalid">
+                    <span class="error-hint" >{{ 'validators.invalidCpf' | translate }}</span>
+                </ng-container>
+            </div>
+
+            <div class="input-container input-icon">
+                <label class="label">{{ 'label.password' | translate }}</label>
+                <input formControlName="password" class="input"
+                    [type]="showPassword ? 'text' : 'password'"
+                    [placeholder]="'placeholder.password' | translate" autocomplete="false">
+                <mat-icon class="svg-icon primary-main-color-stroke" (click)="showPassword = !showPassword" [svgIcon]="showPassword ? 'eye' : 'eye-slash'"></mat-icon>
+                <ng-container *ngIf="showError('password')">
+                    <span class="error-hint" >{{ 'errorHint.required' | translate }}</span>
+                </ng-container>
+            </div>
+
+            <div class="inline login-options">
+                <mat-checkbox formControlName="keepConnected" color="primary">
+                    {{ 'account.login.remember' | translate }}
+                </mat-checkbox>
+            </div>
+            <button [disabled]="disableLogin()" class="btn default large" (click)="login()" (keydown.enter)="login()" type="submit">
+                <span class="primary-light">{{ 'button.login' | translate }}</span>
+            </button>
+        </div>
+    </form>
+</div>
+<mat-progress-spinner *ngIf="loading" class="spinner" [mode]="'indeterminate'"></mat-progress-spinner>

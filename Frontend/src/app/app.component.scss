@@ -1,0 +1,24 @@
+@use './../assets/styles/mixins.scss' as mix;
+@use '../assets/styles/variables.scss' as v;
+@use '../assets/styles/scrollbar.scss';
+
+.theme-button {
+    position: absolute;
+    z-index: 99999;
+    top: 20px;
+    right: 20px;
+}
+
+mat-sidenav.main-sidenav {
+    width: min-content !important;
+
+    mat-sidenav-content.main-container {
+        margin-left: 240px !important;
+    }
+}
+
+::ng-deep app-root {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}

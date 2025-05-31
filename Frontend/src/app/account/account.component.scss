@@ -1,0 +1,109 @@
+@use '../../assets/styles/variables.scss' as v;
+@use '../../assets/styles/mixins.scss' as mix;
+@use '../../assets/styles/common-classes.scss';
+
+.account-container {
+    display: flex;
+    height: 100vh;
+
+    .left.column, .right.column {
+        flex: 1;
+        max-height: 100%;
+    }
+
+    .right.column {
+        justify-content: center;
+        align-items: center;
+
+        @include mix.mq("tablet", max) {
+            justify-content: normal !important;
+            align-items: normal !important;
+        }
+    }
+
+    .left.column {
+        max-height: 100vh;
+        overflow: hidden;
+        position: relative;
+
+        .title-container {
+            margin: 48px auto 8vh 15%;
+            padding: 0 20px;
+
+            .title-font {
+                font-size: 32px;
+                line-height: 43px;
+                color: v.$light-text;
+                white-space: pre-wrap;
+                font-weight: 600;
+            }
+        }
+
+        .photo {
+            flex: 1;
+            object-fit: contain;
+            object-position: bottom;
+            margin: auto auto 50px auto;
+            height: 100px;
+            max-width: 100%;
+            width: 600px;
+        }
+
+        @include mix.mq("tablet", max) {
+            display: none;
+
+            .contact-us-container {
+                display: none;
+            }
+        }
+
+        .contact-us-container {
+            position: absolute;
+            top: 40%;
+            right: 10%;
+
+            img {
+                width: 40px;
+                height: 40px;
+                margin-bottom: 16px;
+                cursor: pointer;
+            }
+
+            .doubts {
+                font-size: 14px;
+                white-space: pre-wrap;
+                color: v.$light-text;
+                line-height: 150%;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .right.column {
+        @include mix.mq("phone", max) {
+            max-width: 100% !important;
+            justify-content: normal !important;
+            align-items: normal !important;
+        }
+    }
+
+    .custom-pad {
+        padding: 30px 30px 0;
+    }
+
+    .logo {
+        max-width: 100%;
+        height: auto;
+        width: 200px;
+        margin-bottom: 22px;
+        object-fit: contain;
+    }
+}
+
+@media only screen and (max-width: 428px) {
+    .right.column {
+        max-width: 100% !important;
+        justify-content: normal !important;
+        align-items: normal !important;
+    }
+}

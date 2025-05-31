@@ -1,0 +1,121 @@
+@use "sass:map";
+@use "sass:color";
+@use './app-theme.scss' as theme;
+
+// COLORS
+$primary-300: map.get(theme.$app-primary, 300); //Primary
+$primary-shade-300: color.adjust($primary-300, $lightness: 10%);
+$primary-tint-300: color.adjust($primary-300, $lightness: 10%);
+$secondary-600: map.get(theme.$app-secondary, 600); //Secondary
+$secondary-shade-600: color.adjust($secondary-600, $lightness: 10%);
+$danger: map.get(theme.$app-red, 700); //Red
+$danger-shade: color.adjust($danger, $lightness: 10%);
+$blue-600: map.get(theme.$app-blue, 600); //Blue
+$blue-shade: color.adjust($blue-600, $lightness: 10%);
+
+//Light
+$light-text: #fff;
+$light-shade: #D5D5E0;
+
+//Dark
+$dark: #4E4B59;
+$darken: #1E2127;
+$darken-shade: #424242;
+
+//Medium
+$medium: #8C8A97;
+$medium-tint: #ACABB8;
+
+// LAYOUT SIZE
+$input-small: 40px;
+$input-medium: 48px;
+$input-large: 56px;
+
+// COMPONENTS COLORS
+$color-checkbox-disabled: $medium-tint;
+$color-loading-spinner: $secondary-shade-600;
+$color-svgIcons: #ACABB8;
+
+// Get classes for the customer pallet.
+$colors: () !default;
+$colors: map.merge((
+    "primary": $primary-300,
+    "secondary": $secondary-600,
+), $colors);
+
+@each $key, $value-shade in $colors {
+    $tint: color.adjust($value-shade, $lightness: 25%);
+    $primary-value: color.adjust($value-shade, $lightness: 10%);
+    $gradient-right: color.adjust($value-shade, $lightness: 17.5%);
+
+    // For backgrounds.
+    .bg-#{$key} {
+        // Ex: class="bg-secondary"
+        background-color: $primary-value;
+
+        // Ex: class="bg-primary-tint"
+        &-tint {
+            background-color: $tint;
+        }
+
+        // Ex: class="bg-secondary-shade"
+        &-shade {
+            background-color: $value-shade;
+        }
+    }
+
+    // For color (text and icons). Ex: class="primary-tint"
+    .#{$key} {
+        color: $primary-value;
+
+        &-tint {
+            color: $tint;
+        }
+
+        &-shade {
+            color: $value-shade;
+        }
+
+        &-main-text {
+            color: var(--main-text);
+        }
+    }
+
+    // For svg icons
+    .svg-icon.#{$key} {
+
+        //Stroke
+        ::ng-deep svg * {
+            stroke: $primary-value !important;
+        }
+
+        &-tint ::ng-deep svg * {
+            stroke: $tint !important;
+        }
+
+        &-tint-fill ::ng-deep svg * {
+            fill: $tint !important;
+        }
+
+        &-shade ::ng-deep svg * {
+            stroke: $value-shade !important;
+        }
+
+        &-light ::ng-deep svg * {
+            stroke: $light-text;
+        }
+
+        &-main-color-stroke ::ng-deep svg * {
+            stroke: var(--main-text);
+        }
+
+        //Fill
+        &-main-color-fill ::ng-deep svg * {
+            fill: var(--main-text);
+        }
+    }
+
+    .gradient-#{$key} {
+        background: linear-gradient(45.34deg, $value-shade -21.46%, $gradient-right 64.3%);
+    }
+}

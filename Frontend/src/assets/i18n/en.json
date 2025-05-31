@@ -1,0 +1,17 @@
+{
+    "pageTitle.tasks": "Tasks",
+    "pageTitle.login": "Login",
+    "account.title": "Admin Panel",
+    "account.login.title": "Log In",
+    "account.login.remember": "Remember me",
+    "label.cpf": "CPF",
+    "label.password": "Password",
+    "placeholder.cpf": "Enter your cpf",
+    "placeholder.password": "Enter your password",
+    "button.login": "Login",
+    "button.pt": "Portuguese",
+    "button.en": "English",
+    "theme.light": "Light Mode",
+    "theme.dark": "Dark Mode",
+    "errorHint.required": "Required field"
+}

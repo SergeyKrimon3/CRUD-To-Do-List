@@ -1,0 +1,31 @@
+<div class="menu column gradient-primary">
+    <mat-icon class="svg-icon close-menu primary-light" *ngIf="isMobile" (click)="closeMenu()" svgIcon="arrow-left"></mat-icon>
+    <img [src]="themeService.setCompanyLogoTheme(themeService.colorTheme())" alt="logo" class="menu-logo">
+    <p class="fs-12 fw-700 primary-light">{{ 'menu.administrativePanel' | translate }}</p>
+    <div class="menu-items column">
+        <!-- Routes -->
+        <div class="menu-buttons-container column">
+            <button routerLinkActive="activated" *ngFor="let item of menuItems"
+                [routerLinkActiveOptions]="myMatchOptions" class="menu-button" mat-flat-button
+                [routerLink]="item.url" [disabled]="item.disabled"
+                (click)="handleMenuItemClick(item)">
+
+                <mat-icon class="svg-icon primary-light" [svgIcon]="item.icon || ''"></mat-icon>
+                <span class="primary-light">{{ 'menu.' + item.name | translate }}</span>
+            </button>
+        </div>
+        <div class="menu-item inline" (click)="doLogout()">
+            <mat-icon class="svg-icon primary-light" [svgIcon]="logout.icon"></mat-icon>
+            <span class="primary-light">{{ 'menu.' + logout.name | translate }}</span>
+        </div>
+    </div>
+    <div class="menu-items column footer-menu">
+        <!-- Fixed items -->
+        <div class="user-container">
+            <div class="column gap-8">
+                <mat-icon class="user-icon svg-icon primary-light" svgIcon="user-square"></mat-icon>
+                <p class="primary-light fw-500 fs-14">{{ userMenuName }}</p>
+            </div>
+        </div>
+    </div>
+</div>
