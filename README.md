@@ -7,7 +7,7 @@ O backend desse projeto foi feito com [json-server](https://github.com/typicode/
 ### 📝 Pré-requisitos
 
 - Ter o **Node.js** instalado (versão 14 ou superior).
-- Ter o **Yarn** instalado.
+- npm (gerenciador de pacotes que já vem com o Node).
 
 ### ▶️ Rodando o Backend
 
@@ -16,3 +16,5 @@ O backend desse projeto foi feito com [json-server](https://github.com/typicode/
 
 ```bash
 cd CRUD-To-Do-List/Backend
+
+Rode o comando npm start para subir o backend.
