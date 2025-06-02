@@ -16,5 +16,3 @@ O backend desse projeto foi feito com [json-server](https://github.com/typicode/
 
 ```bash
 cd CRUD-To-Do-List/Backend
-
-Rode o comando npm start para subir o backend.
