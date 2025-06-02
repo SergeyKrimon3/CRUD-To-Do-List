@@ -48,3 +48,67 @@ Exemplo:
 **Network**: *http://192.168.15.8:4200/account/login*
 
 **Observações**: A aplicação não tem autenticação para o login é apenas exibição. Então poderá realizar o seu login com qualquer **CPF** válido e qualquer senha.
+
+
+
+
+
+
+# 📄 Documentação de Decisões Técnicas (DDT)  
+## Projeto: CRUD de Tarefas - Angular 19  
+**Data de início:** 30/05/2026
+**Data final:** 02/06/2025
+
+---
+
+### 🧱 1. Framework Front-end  
+**Decisão:** Angular 19.
+
+**Motivo:** Familiaridade com o framework e recursos robustos para desenvolvimento SPA.
+
+---
+
+### 🗂️ 2. Estrutura do Projeto  
+**Decisão:** Estrutura modular com Lazy Loading.
+
+**Motivo:** Organização mais clara do código, separando funcionalidades em módulos distintos. Lazy loading melhora desempenho inicial da aplicação.  
+
+---
+
+### 🔗 3. Requisições HTTP  
+**Decisão:** Uso do HttpClient. 
+
+**Motivo:** Solução oficial e integrada, com suporte a interceptors, observables, e tratamento de erros.
+
+---
+
+### 🔄 4. Reatividade e Estado  
+**Decisão:** Utilizado `signal()` do Angular (Angular Core Signals).
+
+**Motivo:**  Signals são mais simples, com melhor performance e integração direta com o Angular. 
+
+---
+
+### 🧾 5. Formulários  
+**Decisão:** Uso do FormBuilder com Reactive Forms.
+
+**Motivo:**  Mais controle sobre as validações e melhor escalabilidade.  
+
+---
+
+### 🎨 6. Layout e Estilização  
+**Decisão:** Angular Material + SCSS puro. 
+
+**Motivo:** Material traz componentes prontos e responsivos. SCSS facilita a organização do estilo com variáveis, mixins e estrutura modular.  
+
+---
+
+### 🗃️ 7. Backend e Armazenamento  
+**Decisão:** JSON.SERVER como API fake.  
+
+**Motivo:**  Permite simular um backend REST de forma rápida e leve para desenvolvimento local.  
+
+---
+
+### ✅ Considerações Finais  
+Essa documentação será atualizada conforme novas decisões forem tomadas no decorrer do projeto. O objetivo é manter a rastreabilidade técnica e justificar cada escolha feita no código.
