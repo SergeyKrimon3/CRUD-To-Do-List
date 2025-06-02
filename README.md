@@ -13,6 +13,7 @@ O backend desse projeto foi feito com [json-server](https://github.com/typicode/
 
 1. Abra o terminal.
 2. Navegue até a pasta do backend:
+3. Rode o comando **npm start**.
 
 ```bash
 cd CRUD-To-Do-List/Backend
