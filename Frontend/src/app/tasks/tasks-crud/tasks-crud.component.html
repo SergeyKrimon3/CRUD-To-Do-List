@@ -1,0 +1,50 @@
+<div class="tasks-crud internal-page gap-20 align-end responsive-mobile">
+    <app-header>
+		<div class="between wth-100">
+			<div class="header-title-container inline gap-18">
+				<mat-icon class="svg-icon primary-main-color-stroke" svgIcon="note-2"></mat-icon>
+				<strong class="primary-main-text fw-700 fs-22 to-point button-link" (click)="backPage()">
+					{{ 'header.title.tasks' | translate }}
+				</strong>
+				<strong class="primary-main-text fw-700 fs-22">></strong>
+				<strong class="primary-main-text fw-700 fs-22">{{ ('tasks.crud.title.' + mode) | translate }}</strong>
+			</div>
+		</div>
+	</app-header>
+    <form [formGroup]="taskForm" class="m-top-50">
+        <div class="event-details-container">
+            <div class="input-container event-name">
+                <label class="primary-main-text fw-700">{{ 'label.title' | translate }}</label>
+                <input class="input no-border event-id" formControlName="title" [readonly]="mode === 'view'"
+                    [placeholder]="'placeholder.task.title' | translate" maxlength="100" required/>
+                <span class="error-hint" *ngIf="showError('title', taskForm)">
+                    {{ 'errorHint.required' | translate }}
+                </span>
+            </div>
+        </div>
+        <div class="input-container">
+            <label class="primary-main-text fw-700">{{ 'label.description' | translate }}</label>
+            <textarea #descriptionText class="textarea input" formControlName="description"
+                maxlength="200" [readonly]="mode === 'view'"
+                [placeholder]="'placeholder.task.description' | translate">
+            </textarea>
+            <span class="length-hint" *ngIf="!showError('description', taskForm)">
+                {{ descriptionText?.value?.length }} / 200 {{ 'textarea.characters' | translate }}
+            </span>
+            <span class="error-hint" *ngIf="showError('description', taskForm)">
+                {{ 'errorHint.required' | translate }}
+            </span>
+        </div>
+        <div class="container-buttons centered gap-24 m-top-24">
+            <button class="btn outline" (click)="backPage()">
+                <span class="primary-main-company-text to-point">{{ (this.mode === eMode.VIEW ? 'button.back' : 'button.cancel') | translate }}</span>
+            </button>
+            <button class="btn default" *ngIf="mode !== 'view'" [disabled]="!taskForm.valid || loading" (click)="createTask()">
+                <span class="primary-light to-point">
+                    {{ (this.mode === eMode.CREATE ? 'button.save' : 'button.edit') | translate }}
+                </span>
+            </button>
+        </div>
+    </form>
+</div>
+<mat-progress-spinner *ngIf="loading" class="spinner" [mode]="'indeterminate'"></mat-progress-spinner>

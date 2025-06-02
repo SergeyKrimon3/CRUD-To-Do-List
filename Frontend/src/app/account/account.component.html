@@ -1,14 +1,14 @@
 <div class="account-container">
     <div class="left column main-company-bg" *ngIf="!isMobile">
         <div class="title-container">
-            <img [src]="themeService.setCompanyLogoTheme(themeService.colorTheme())" alt="logo" class="logo">
+            <img [src]="themeService.setCompanyLogoTheme()" alt="logo" class="logo">
             <h1 class="title-font">{{ 'account.title' | translate }}</h1>
         </div>
         <img class="photo" src="assets/images/account-photo.png" alt="photo">
     </div>
     <div class="right column">
         <div class="custom-pad inline gap-10" *ngIf="isMobile">
-            <img [src]="themeService.setCompanyLogoTheme(themeService.colorTheme())" alt="logo" class="logo">
+            <img [src]="themeService.setCompanyLogoTheme()" alt="logo" class="logo">
         </div>
         <router-outlet></router-outlet>
     </div>

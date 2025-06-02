@@ -22,17 +22,12 @@ export class MenuComponent implements OnInit, AfterViewInit, OnDestroy {
     public loading: boolean = false;
     public menuItems: Array<MenuItems> = [
         {
-            name: 'events',
-            icon: 'star',
-            url: '/events',
+            name: 'tasks',
+            icon: 'note-2',
+            url: '/tasks',
         },
-        {
-            name: 'terms',
-            icon: 'book',
-            url: '/terms',
-        }
     ];
-    
+
     public logout: { name: string, icon: string } = { name: 'logout', icon: 'logout' };
     public isMobile: boolean = false;
     public isMobileSubscription!: Subscription;
@@ -93,7 +88,7 @@ export class MenuComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public doLogout(): void {
-        // this.accountService.logout();
+        this.router.navigate(['/account-login']);
 
         if (this.isMobile) {
             this.closeMenu();

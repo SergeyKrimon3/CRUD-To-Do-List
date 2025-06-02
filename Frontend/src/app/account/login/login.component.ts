@@ -1,10 +1,15 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { showErrorForInputs } from '../../shared/validators/form-group.validator';
 import { CpfCnpjValidator } from '../../shared/validators/cpf-cnpj.validator';
+import { IAuth } from '../../shared/models/auth.model';
+import { LocalStorageService } from 'angular-web-storage';
+import { LocalStorageKeys } from '../../shared/models/storage-keys.model';
+import { DefaultSetTimeout } from '../../../constants/constants';
+import { UtilService } from '../../shared/services/util.service';
 
 @Component({
     selector: 'app-login',
@@ -28,7 +33,8 @@ export class LoginComponent implements OnInit {
         private readonly _formBuilder: FormBuilder,
         private readonly location: Location,
         private readonly router: Router,
-        private readonly activatedRoute: ActivatedRoute,
+        private readonly localStorage: LocalStorageService,
+        private readonly utilService: UtilService,
     ) {
         this.form = this._formBuilder.group({
             cpf: ['', [Validators.required, CpfCnpjValidator]],
@@ -43,6 +49,24 @@ export class LoginComponent implements OnInit {
 
     public async login(): Promise<void> {
         this.loading = true;
+        const loginData: IAuth = {
+            cpf: this.form.value.cpf,
+            password: this.form.value.password
+        }
+
+        setTimeout(() => {
+            if (this.form.value.keepConnected) {
+                const loginToStorage: IAuth = {
+                    cpf: this.form.value.cpf,
+                    password: null,
+                }
+                this.localStorage.set(LocalStorageKeys.SAVED_LOGIN_DATA, JSON.stringify(loginToStorage));
+            } else {
+                this.localStorage.remove(LocalStorageKeys.SAVED_LOGIN_DATA);
+            }
+            this.router.navigate(['/tasks']);
+            this.loading = false;
+        }, DefaultSetTimeout);
     }
 
     public cancel(): void {
@@ -61,10 +85,16 @@ export class LoginComponent implements OnInit {
     }
 
     public async verifyIfHasRedirectUrl(): Promise<void> {
-        this.activatedRoute.queryParams.subscribe(
-            (params: Params) => {
-                this.redirectUrl = params['redirectUrl'];
-            }
-        );
+        this.getStorageDataForLogin();
+    }
+
+    public getStorageDataForLogin(): void {
+        const loginData: IAuth = this.utilService.getLocalStorageDataFormatted(LocalStorageKeys.SAVED_LOGIN_DATA);
+        if (loginData) {
+            this.form.patchValue({
+                cpf: loginData.cpf,
+                keepConnected: true
+            });
+        }
     }
 }

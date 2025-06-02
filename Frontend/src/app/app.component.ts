@@ -11,12 +11,14 @@ import { flagIcons, svgIcons } from '../constants/svg-icons.constants';
 import { ETheme, ThemeService } from './shared/services/theme.service';
 import { SidenavService } from './shared/services/sidenav.service';
 import { ELanguage, LanguageService } from './shared/services/language.service';
+import { MenuComponent } from './shared/components/menu/menu.component';
 
 @Component({
     selector: 'app-root',
     imports: [
         RouterOutlet,
-        SharedModule
+        SharedModule,
+        MenuComponent
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
@@ -90,16 +92,20 @@ export class AppComponent implements OnInit {
     public translateTheme(theme: ETheme): string {
         if (theme === ETheme.LIGHT) {
             return 'theme.light';
-        } else {
+        } else if (theme == ETheme.DARK) {
             return 'theme.dark';
+        } else {
+            return 'theme.system'
         }
     }
 
     public translateLanguage(language: ELanguage): string {
         if (language === ELanguage.PT_BR) {
             return 'button.pt';
-        } else {
+        } else if (language === ELanguage.EN) {
             return 'button.en';
+        } else {
+            return 'button.es';
         }
     }
 }

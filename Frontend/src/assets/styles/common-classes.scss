@@ -87,9 +87,31 @@ h1 {
     font-size: 24px;
 }
 
+//Height
+.hght-100 {
+    height: 100%;
+}
+
 //width
 .wth-100 {
     width: 100%;
+}
+
+.min-wth-150 {
+    min-width: 150px;
+}
+
+//Margin
+.m-top-24 {
+    margin-top: 24px;
+}
+
+.m-top-50 {
+    margin-top: 50px;
+}
+
+.m-btm-top-30 {
+    margin: 30px 0;
 }
 
 //Decoration
@@ -204,6 +226,12 @@ h1 {
     font-size: 22px !important;
 }
 
+.modal-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
 //Input
 .input-container, .button-container {
     position: relative;
@@ -211,6 +239,14 @@ h1 {
 
     ::-webkit-input-placeholder {
         color: var(--main-input-placeholder);
+    }
+
+    :-webkit-autofill,
+    :-webkit-autofill:hover, 
+    :-webkit-autofill:focus, 
+    :-webkit-autofill:active{
+        -webkit-box-shadow: 0 0 0px 1000px var(--main-bg) inset !important;
+        -webkit-text-fill-color: var(--main-input-placeholder) !important;
     }
 
     :-moz-placeholder {
@@ -309,7 +345,7 @@ h1 {
     }
 
     &:focus:not(:read-only,:disabled) {
-        border-color: v.$primary-300;
+        border-color: var(--main-company-bg);
     }
 
     &.ng-invalid.ng-touched:not(:read-only,:disabled) {
@@ -339,7 +375,7 @@ h1 {
         scrollbar-color: v.$medium-tint #ffffff00;
         overflow-y: auto;
         resize: none;
-    } 
+    }
 }
 
 //Label
@@ -409,7 +445,7 @@ label.label {
     }
 
     &.primary-tint {
-        background-color: v.$primary-tint-300;
+        background-color: v.$primary-shade-300;
 
         &:hover:not(:disabled), &.selected:not(:disabled) {
             opacity: 0.8;
@@ -438,15 +474,15 @@ label.label {
         color: v.$medium;
 
         &.primary:hover:not(:disabled) {
-            border-color: v.$primary-tint-300;
-            color: v.$primary-tint-300;
+            border-color: var(--main-company-bg-shade);
+            color: var(--main-company-bg-shade);
             background: transparent;
         }
     }
 
     &.outline-primary {
         background: v.$light-text;
-        border: 1px solid v.$primary-tint-300;
+        border: 1px solid v.$primary-shade-300;
         color: v.$primary-300 !important;
     }
 
@@ -481,5 +517,153 @@ label.label {
         color: v.$primary-300;
         background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)),
         linear-gradient(v.$primary-300, v.$primary-300);
+    }
+}
+
+//TABLE
+.table {
+    height: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 0 50px;
+
+    .table-container {
+        margin-top: -10px;
+
+        table.mat-mdc-table.hover-table {
+            border-spacing: 0 20px;
+            background: transparent !important;
+
+            th {
+                position: relative;
+                top: 20px;
+
+                div {
+                    display: flex;
+                    height: 100%;
+                    align-items: flex-start;
+                    height: 15px;
+
+                    p {
+                        white-space: break-spaces;
+                    }
+                }
+            }
+
+            tr.mat-mdc-header-row {
+                display: none !important;
+            }
+
+            td {
+                background-color: transparent;
+                padding: 0;
+                white-space: normal !important;
+                height: 88px;
+                border: 1px solid v.$light-shade;
+                width: 100vw !important;
+
+                div.fill-background {
+                    background-color: transparent;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    padding: 12px 16px;
+                    align-items: flex-start;
+                    cursor: pointer;
+
+                    @include mix.mq("tablet", max) {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: 20px;
+                    }
+
+                    &:hover {
+                        background: color-mix(in srgb, var(--main-company-bg-shade) 30%, transparent);
+                    }
+
+                    .value-bold {
+                        font-size: 16px;
+                        font-weight: 700;
+                        color: v.$dark;
+                    }
+
+                    .fill-margin {
+                        margin-bottom: 4px;
+                    }
+
+                    .small-text {
+                        font-size: 10px !important;
+                    }
+
+                    .color-dark-tint {
+                        font-size: 13px;
+                        color: v.$dark !important;
+                        font-weight: 500;
+
+                        &.with-bold {
+                            font-weight: bold;
+                        }
+                    }
+                }
+
+                &.first-column {
+                    border-top-left-radius: 10px;
+                    border-bottom-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                }
+
+                &.last-column {
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                }
+            }
+        }
+
+        .table-td-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+
+            &.pad-left {
+                padding-left: 16px;
+            }
+        }
+
+        .more-icon { 
+            width: 24px;
+            height: 24px;
+
+            ::ng-deep svg * {
+                fill: transparent !important;
+            }
+        }
+    }
+
+    @include mix.mq("phone-wide", max) {
+        table, tbody, th, td { 
+            display: table-cell !important;
+        }
+
+        td {
+            height: auto !important;
+        }
+    }
+}
+
+//Back to top button
+.back-top {
+    position: fixed;
+    border-radius: 10px !important;
+    top: 90%;
+    right: 60px;
+    height: 50px;
+    width: 50px;
+    min-width: 50px !important;
+    z-index: 2;
+
+    @include mix.mq("tablet", max) {
+        right: 40px;
     }
 }

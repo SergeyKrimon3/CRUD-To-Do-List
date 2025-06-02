@@ -1,0 +1,129 @@
+<div class="tasks internal-page gap-20 align-end responsive-mobile" (scroll)="pixelsNumbersScrolledPage.toGetPixelsNumbersScrolled($event)" id="scrollToTop">
+    <app-header>
+        <div class="between wth-100">
+            <div class="header-title-container inline gap-18">
+                <mat-icon class="svg-icon primary-main-color-stroke" svgIcon="note-2"></mat-icon>
+                <strong class="primary-main-text fw-700 fs-22">{{ 'header.title.tasks' | translate }}</strong>
+            </div>
+        </div>
+    </app-header>
+    <app-back-to-top-button *ngIf="pixelsNumbersScrolledPage.showBackToTopButton" [scrollToTopId]="'scrollToTop'"></app-back-to-top-button>
+    <div class="m-top-24 inline-end">
+        <button class="btn default" (click)="goToCreateTask()">
+            <span class="primary-light">{{ 'button.create' | translate }}</span>
+        </button>
+    </div>
+    <div class="tasks-filters inline gap-20 align-end responsive-mobile m-btm-top-30">
+        <div class="column wth-100 flex-1">
+            <label class="label">Status</label>
+            <mat-select class="select placeholder-dark arrow-down min-wth-150" [placeholder]="'placeholder.all' | translate"
+                required disableOptionCentering panelClass="margin-panel" [(ngModel)]="selectedTaskStatus">
+                <mat-option *ngFor="let status of taskStatusList" [value]="status">
+                    <span class="primary-main-text fw-400">{{ translateTaskStatusList(status) | translate }}</span>
+                </mat-option>
+            </mat-select>
+        </div>
+        <div class="column wth-100 flex-1">
+            <div class="input-container input-icon flex-1">
+                <label class="primary-main-text fw-700">{{ 'label.date' | translate }}</label>
+                <input class="input min-wth-150" [matDatepicker]="date" [disabled]="true" [(ngModel)]="selectedDate" [matDatepickerFilter]="maxDate"
+                    [placeholder]="'placeholder.date' | translate" [readonly]="true">
+                <mat-datepicker-toggle matSuffix [for]="date" class="calendar-icon input-with-label">
+                    <mat-icon matDatepickerToggleIcon svgIcon="calendar-2" class="svg-icon primary-main-company-color-stroke calendar-2"></mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker class="calendar-primary" #date disabled="false"></mat-datepicker>
+            </div>
+        </div>
+        <div class="column wth-100 flex-2">
+            <label class="label">{{ 'label.search' | translate }}</label>
+            <input class="input min-wth-150" [(ngModel)]="taskFilter">
+        </div>
+        <div class="filter-buttons gap-8 inline">
+            <button class="btn outline" (click)="clearFilters()">
+                <span class="primary-main-company-text to-point">{{ 'button.clear' | translate }}</span>
+            </button>
+
+            <button class="btn default" (click)="searchTask()">
+                <span class="primary-light">{{ 'button.search' | translate }}</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="inline m-btm-top-30 gap-18">
+        <mat-icon class="svg-icon primary-main-color-stroke" svgIcon="menu"></mat-icon>
+        <span class="primary-main-text fw-400">{{ 'tasks.displaying' | translate }}<strong class="fw-600"> {{ dataSource.data.length || 0 }} </strong>{{ 'tasks.name' | translate }}(s)</span>
+    </div>
+
+    <div class="table m-top-24">
+        <div class="table-container" *ngIf="dataSource?.data?.length">
+            <table mat-table [dataSource]="dataSource" class="hover-table">
+                <ng-container matColumnDef="tasks">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element" class="first-column">
+                        <div class="fill-background">
+                            <div class="flex-1 height-100">
+                                <div class="between table-td-content pad-left height-100 first-column">
+                                    <span class="primary-main-text fill-margin fs-16 fw-700">{{ element?.title }}</span>
+                                    <p class="primary-main-text fill-margin small-text">ID: #{{ element?.id }}</p>
+                                </div>
+                            </div>
+                            <div class="flex-1 flex-wrap">
+                                <div class="table-td-content status pad-left gap-8 flex-wrap">
+                                    <span class="primary-main-text fw-700">{{ 'table.column.description' | translate }}:</span>
+                                    <span class="primary-main-text">{{ element?.description }}</span>
+                                </div>
+                            </div>
+                            <div class="flex-1 flex-wrap">
+                                <div class="table-td-content status pad-left gap-8 flex-wrap">
+                                    <span class="primary-main-text fw-700">Status:</span>
+                                    <span [ngClass]="getTaskStatusColor(element?.status)">{{ translateTaskStatusList(element?.status) | translate }}</span>
+                                </div>
+                            </div>
+                            <div class="flex-1 flex-wrap">
+                                <div class="table-td-content status pad-left gap-8 flex-wrap">
+                                    <span class="primary-main-text fw-700">{{ 'table.column.create' | translate }}:</span>
+                                    <span class="primary-main-text" *ngIf="element?.createdAt">
+                                        {{ formatDateWithAbbreviatedMonth(element?.createdAt) }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="flex-1 hght-100 inline-end table-actions-buttons gap-20">
+                                <div class="inline-end gap-30 pad-left align-end" *ngIf="element?.status === eStatusTask.PENDING">
+                                    <mat-icon class="svg-icon primary-main-color-fill to-point"
+                                        svgIcon="check" (click)="updateTaskStatus(element?.id, eStatusTask.FINISHED); $event.stopPropagation()"
+                                        [matTooltip]="'tooltip.finish' | translate"
+                                        matTooltipClass="dark-tooltip" matTooltipPosition="above">
+                                    </mat-icon>
+                                </div>
+                                <div class="inline-end gap-30 pad-left align-end" *ngIf="element?.status === eStatusTask.FINISHED">
+                                    <mat-icon class="svg-icon primary-main-color-stroke to-point"
+                                        svgIcon="rotate-left" (click)="updateTaskStatus(element?.id, eStatusTask.PENDING); $event.stopPropagation()"
+                                        [matTooltip]="'tooltip.revert' | translate"
+                                        matTooltipClass="dark-tooltip" matTooltipPosition="above">
+                                    </mat-icon>
+                                </div>
+                                <div class="inline-end gap-30 pad-left align-end">
+                                    <mat-icon class="svg-icon primary-main-color-stroke to-point" (click)="goToEditTask(element?.id); $event.stopPropagation()"
+                                        svgIcon="edit"
+                                        [matTooltip]="'tooltip.edit' | translate"
+                                        matTooltipClass="dark-tooltip" matTooltipPosition="above">
+                                    </mat-icon>
+                                </div>
+                                <div class="inline-end gap-30 pad-left align-end">
+                                    <mat-icon class="svg-icon primary-main-color-stroke to-point"
+                                        svgIcon="trash" (click)="openConfirmModal(element?.id); $event.stopPropagation()"
+                                        [matTooltip]="'tooltip.delete' | translate"
+                                        matTooltipClass="dark-tooltip" matTooltipPosition="above">
+                                    </mat-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr (click)="goToViewTask(row.id)" mat-row *matRowDef="let row; columns: displayedColumns; let element; let index = index"></tr>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+            </table>
+        </div>
+    </div>
+</div>
+<mat-progress-spinner *ngIf="loading || loadingRequest" class="spinner" [mode]="'indeterminate'"></mat-progress-spinner>

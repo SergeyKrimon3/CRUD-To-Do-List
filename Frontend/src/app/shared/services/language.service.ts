@@ -1,7 +1,7 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'angular-web-storage';
-import { LocalStorageKeys } from '../models/storage-keys';
+import { LocalStorageKeys } from '../models/storage-keys.model';
 
 export interface ILanguage {
     name: ELanguage;
@@ -10,7 +10,8 @@ export interface ILanguage {
 
 export enum ELanguage {
     PT_BR = 'pt-br',
-    EN = 'en'
+    EN = 'en',
+    ES = 'es'
 }
 
 @Injectable({
@@ -27,6 +28,10 @@ export class LanguageService {
         {
             name: ELanguage.EN,
             icon: 'us'
+        },
+        {
+            name: ELanguage.ES,
+            icon: 'es'
         }
     ];
     public selectedLanguage = computed(() => {
@@ -37,14 +42,14 @@ export class LanguageService {
         private readonly translate: TranslateService,
         private readonly localStorageService: LocalStorageService,
     ) {
-        const initialLanguage: ELanguage = this.loadInitialLanguage();
-        this.language.set(initialLanguage);
+        const initialLanguage: string = this.loadInitialLanguage();
+        this.language.set(initialLanguage as ELanguage);
         this.setSystemLanguage;
     }
 
-    private loadInitialLanguage(): ELanguage {
+    private loadInitialLanguage(): string {
         const getLanguageFromStorage: string = this.localStorageService.get(LocalStorageKeys.LANGUAGE) as ELanguage;
-        return getLanguageFromStorage === ELanguage.PT_BR || getLanguageFromStorage === ELanguage.EN ? getLanguageFromStorage : ELanguage.PT_BR;
+        return getLanguageFromStorage;
     }
 
     public getAllLanguages(): ILanguage[] {

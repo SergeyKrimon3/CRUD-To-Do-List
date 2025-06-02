@@ -1,7 +1,6 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
 import { LocalStorageService } from 'angular-web-storage';
-import { LocalStorageKeys } from '../models/storage-keys';
-
+import { LocalStorageKeys } from '../models/storage-keys.model';
 
 export interface ITheme {
     name: ETheme;
@@ -10,7 +9,8 @@ export interface ITheme {
 
 export enum ETheme {
     DARK = 'dark',
-    LIGHT = 'light'
+    LIGHT = 'light',
+    SYSTEM = 'system'
 }
 
 @Injectable({
@@ -18,8 +18,12 @@ export enum ETheme {
 })
 export class ThemeService {
 
-    public colorTheme = signal<ETheme>(ETheme.LIGHT);
+    public colorTheme = signal<ETheme>(ETheme.SYSTEM);
     public allThemes: ITheme[] = [
+        {
+            name: ETheme.SYSTEM,
+            icon: 'monitor'
+        },
         {
             name: ETheme.LIGHT,
             icon: 'sun'
@@ -32,18 +36,26 @@ export class ThemeService {
     public selectedTheme = computed(() => {
         return this.allThemes.find((theme) => theme.name === this.colorTheme());
     });
+    private systemPrefersDark = signal(window.matchMedia('(prefers-color-scheme: dark)').matches);
 
     constructor(
         private readonly localStorageService: LocalStorageService,
     ) {
-        const initialTheme: ETheme = this.loadInitialTheme();
+        const initialTheme: ETheme = this.loadInitialTheme() as ETheme;
         this.colorTheme.set(initialTheme);
-        this.setSystemTheme;
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+            this.systemPrefersDark.set(event.matches);
+        });
+
+        effect(() => {
+            this.setSystemTheme();
+        });
     }
 
-    private loadInitialTheme(): ETheme {
+    private loadInitialTheme(): string {
         const getThemeFromStorage: string = this.localStorageService.get(LocalStorageKeys.THEME_KEY) as ETheme;
-        return getThemeFromStorage === ETheme.DARK || getThemeFromStorage === ETheme.LIGHT ? getThemeFromStorage : ETheme.LIGHT;
+        return getThemeFromStorage;
     }
 
     public getAllThemes(): ITheme[] {
@@ -52,22 +64,19 @@ export class ThemeService {
 
     public setTheme(theme: ETheme): void {
         this.colorTheme.set(theme);
-        this.setCompanyLogoTheme(theme);
         this.localStorageService.set(LocalStorageKeys.THEME_KEY, theme);
     }
 
-    public setSystemTheme = effect(() => {
-        const theme: ETheme = this.colorTheme();
-        document.documentElement.classList.remove(ETheme.DARK, ETheme.LIGHT);
-        document.documentElement.classList.add(theme);
-        document.body.style.colorScheme = theme;
-    });
+    public setSystemTheme(): void {
+        document.documentElement.classList.remove(ETheme.DARK, ETheme.LIGHT, ETheme.SYSTEM);
+        document.documentElement.classList.add(this.colorTheme());
+        document.body.style.colorScheme = this.colorTheme();
+    }
 
-    public setCompanyLogoTheme(theme: ETheme): string {
-        if (theme === ETheme.DARK) {
-            return 'assets/images/company-name-logo-white.png';
-        } else {
-            return 'assets/images/company-name-logo.png';
-        }
+    public setCompanyLogoTheme(): string {
+        const prefersDark: boolean = this.systemPrefersDark();
+        const isDark: boolean = this.colorTheme() === ETheme.DARK || (this.colorTheme() === ETheme.SYSTEM && prefersDark);
+
+        return isDark ? 'assets/images/company-name-logo-white.png' : 'assets/images/company-name-logo.png';
     }
 }

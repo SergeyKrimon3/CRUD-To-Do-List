@@ -1,0 +1,16 @@
+<div class="confirm-modal modal-content column">
+    <mat-icon class="svg-icon primary-main-color-stroke to-point close-icon" mat-dialog-close
+        svgIcon="close-circle">
+    </mat-icon>
+    <h1 class="primary-main-text fw-700">{{ data?.title | translate }}</h1>
+    <p class="primary-main-text">{{ data?.text | translate }}</p>
+
+    <div class="modal-buttons m-top-24">
+        <button class="btn primary outline wth-100" mat-dialog-close>
+            {{ data?.declineOption | translate }}
+        </button>
+        <button class="btn default wth-100" (click)="close()">
+            <span class="primary-light">{{ data?.confirmOption | translate }}</span>
+        </button>
+    </div>
+</div>

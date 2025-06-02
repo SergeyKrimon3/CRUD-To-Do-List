@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from "@angular/material/snack-bar";
 import { TranslateModule } from "@ngx-translate/core";
 import { CustomSnackbarComponent } from "./components/custom-snackbar/custom-snackbar.component";
-import { MenuComponent } from "./components/menu/menu.component";
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
     declarations: [],
@@ -17,6 +17,8 @@ import { MenuComponent } from "./components/menu/menu.component";
         ReactiveFormsModule,
         TranslateModule,
         CustomSnackbarComponent,
+        NgxMaskDirective,
+        NgxMaskPipe,
     ],
     exports: [
         CommonModule,
@@ -24,8 +26,11 @@ import { MenuComponent } from "./components/menu/menu.component";
         MaterialModule,
         ReactiveFormsModule,
         TranslateModule,
+        NgxMaskDirective,
+        NgxMaskPipe,
     ],
     providers: [
+        provideNgxMask(),
         CustomSnackbarComponent,
         {
             provide: MatSnackBarRef,

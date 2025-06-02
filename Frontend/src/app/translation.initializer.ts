@@ -13,23 +13,27 @@ export function ApplicationInitializerFactory(
     return async () => {
         await injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
 
-        translate.addLangs(['en', 'fr', 'pt-br', 'eninternal', 'pt-brinternal']);
+        translate.addLangs(['en', 'es', 'pt-br']);
         translate.setDefaultLang('pt-br');
 
         const browserLang: string | undefined = translate.getBrowserLang();
 
-        if (browserLang && browserLang.match(/pt/)) {
-            try {
-                await translate.use('pt-br').toPromise();
-            } catch (err) {
-                console.log(err);
+        let langToUse: string = 'pt-br';
+
+        if (browserLang) {
+            if (browserLang.startsWith('pt')) {
+                langToUse = 'pt-br';
+            } else if (browserLang.startsWith('es')) {
+                langToUse = 'es';
+            } else if (browserLang.startsWith('en')) {
+                langToUse = 'en';
             }
-        } else {
-            try {
-                await translate.use('en').toPromise();
-            } catch (err) {
-                console.log(err);
-            }
+        }
+
+        try {
+            await translate.use(langToUse).toPromise();
+        } catch (err) {
+            console.error(err);
         }
     };
 }

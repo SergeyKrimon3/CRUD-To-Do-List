@@ -1,0 +1,17 @@
+@use './../../assets/styles/variables.scss' as v;
+@use './../../assets/styles/mixins.scss' as mix;
+
+.tasks-filters {
+    &.responsive-mobile {
+        flex-wrap: wrap;
+
+        @include mix.mq("tablet", max) {
+            flex-direction: column;
+            align-items: flex-start !important;
+        }
+    }
+
+    .input-container {
+        padding-bottom: 0 !important;
+    }
+}

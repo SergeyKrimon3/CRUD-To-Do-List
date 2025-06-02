@@ -34,12 +34,37 @@ $theme: mat.m2-define-light-theme((color:
     density: 0)
 );
 
+@include mat.datepicker-overrides((
+    calendar-container-background-color: var(--main-bg-shade), //Color
+    calendar-date-selected-state-text-color: var(--main-company-bg), //Color
+    calendar-date-selected-state-background-color: v.$dark, //Color
+    calendar-date-disabled-state-text-color: v.$medium, //Color
+    calendar-date-today-selected-state-outline-color: transparent, //Color
+    calendar-date-today-outline-color: var(--main-company-bg), //Color
+    calendar-body-label-text-color: var(--main-text), //Color
+    calendar-period-button-text-color: var(--main-text), //Color
+    calendar-period-button-icon-color: transparent, //Color
+    calendar-navigation-button-icon-color: v.$dark, //Color
+    calendar-container-shape: none, //Base
+    calendar-header-divider-color: none, //Base
+));
+
+@include mat.tooltip-overrides((
+    container-color: #424242, //Color
+    supporting-text-color: #fff, //Color
+    container-shape: 5px, //Base
+    supporting-text-size: 10px, //Typography
+    supporting-text-weight: 700, //Typography
+    supporting-text-line-height: 20px //Typography
+));
+
 @include mat.core-theme($theme);
 
 html.light {
     color-scheme: light;
-    --main-text: #{v.$darken};
+    --main-text: #{v.$darken} !important;
     --main-bg: #{v.$light-text};
+    --main-bg-shade: #{v.$light-text};
     --main-company-bg: #{v.$primary-300};
     --main-company-bg-shade: #{v.$primary-shade-300};
 
@@ -47,55 +72,122 @@ html.light {
     --mat-menu-container-color: var(--main-bg) !important;
     --mat-icon-color: var(--main-text) !important;
     --mat-menu-item-icon-color: var(--main-text) !important;
-
-
-
-
-    --mat-checkbox-label-text-color: #8C8A97 !important;
     --mat-sidenav-container-text-color: #8C8A97 !important;
+    --mat-sidenav-content-background-color: var(--main-bg) !important;
+    --mat-checkbox-label-text-color: var(--main-text) !important;
+    --mat-menu-item-label-text-color: var(--main-text) !important;
+    --main-input-placeholder: var(--main-text) !important;
+    --mdc-dialog-container-color: #{v.$light-text} !important;
+    --mat-select-placeholder-text-color: var(--main-text) !important;
+    --mat-select-panel-background-color: #{v.$light-text} !important;
+    --mat-select-enabled-arrow-color: var(--main-company-bg) !important;
+    --mat-select-enabled-trigger-text-color: var(--main-text) !important;
+    --mat-minimal-pseudo-checkbox-selected-checkmark-color: var(--main-company-bg) !important;
+    --mat-option-selected-state-label-text-color: var(--main-company-bg) !important;
+    --mdc-text-button-label-text-color: var(--main-text) !important;
     --mdc-filled-button-label-text-color: var(--main-text) !important;
-    --main-input-placeholder: #1E2127 !important;
-    --mat-sidenav-content-background-color: #FFF !important;
-    --mat-select-placeholder-text-color: #1E2127 !important;
-    --mdc-dialog-container-color: #FFF !important;
-    --mat-expansion-header-text-color: #1E2127 !important;
-    --mat-menu-item-label-text-color: #1E2127 !important;
-    --mat-minimal-pseudo-checkbox-selected-checkmark-color: v.$primary-300 !important;
-    --mat-datepicker-calendar-container-background-color: #F9F9F9 !important;
-    --mat-datepicker-calendar-navigation-button-icon-color: #000 !important;
-    --mat-datepicker-calendar-header-text-color: #000 !important;
+    --mat-datepicker-calendar-header-text-color: var(--main-text) !important;
+    --mat-datepicker-calendar-navigation-button-icon-color: var(--main-text) !important;
+    --mat-datepicker-calendar-date-text-color: var(--main-text) !important;
 }
 
 html.dark {
     color-scheme: dark;
-    --main-text: #{v.$light-text};
-    --main-bg: #{v.$darken-shade};
+    --main-text: #{v.$light-text} !important;
+    --main-bg: #{v.$darken};
+    --main-bg-shade: #{v.$darken-shade};
     --main-company-bg: #{v.$secondary-600};
     --main-company-bg-shade: #{v.$secondary-shade-600};
 
     //Material
-    --mat-menu-container-color: var(--main-bg) !important;
+    --mat-menu-container-color: #{v.$darken-shade} !important;
     --mat-icon-color: var(--main-text) !important;
     --mat-menu-item-icon-color: var(--main-text) !important;
-
-
-
-
-
-
-    --mat-checkbox-label-text-color: var(--main-text) !important;
     --mat-sidenav-container-text-color: #8C8A97 !important;
+    --mat-sidenav-content-background-color: var(--main-bg) !important;
+    --mat-checkbox-label-text-color: var(--main-text) !important;
+    --mat-menu-item-label-text-color: var(--main-text) !important;
+    --main-input-placeholder: var(--main-text) !important;
+    --mdc-dialog-container-color: #{v.$darken-shade} !important;
+    --mat-select-placeholder-text-color: var(--main-text) !important;
+    --mat-select-panel-background-color: #{v.$darken-shade} !important;
+    --mat-select-enabled-arrow-color: var(--main-company-bg) !important;
+    --mat-select-enabled-trigger-text-color: var(--main-text) !important;
+    --mat-minimal-pseudo-checkbox-selected-checkmark-color: var(--main-company-bg) !important;
+    --mat-option-selected-state-label-text-color: var(--main-company-bg) !important;
+    --mdc-text-button-label-text-color: var(--main-text) !important;
     --mdc-filled-button-label-text-color: var(--main-text) !important;
-    --main-input-placeholder: #FFF;
-    --mat-sidenav-content-background-color: #1E2127 !important;
-    --mat-select-placeholder-text-color: #FFF !important;
-    --mdc-dialog-container-color: #424242 !important;
-    --mat-expansion-header-text-color: #FFF !important;
-    --mat-menu-item-label-text-color: #FFF !important;
-    --mat-minimal-pseudo-checkbox-selected-checkmark-color: v.$primary-300 !important;
-    --mat-datepicker-calendar-container-background-color: #424242 !important;
-    --mat-datepicker-calendar-navigation-button-icon-color: #FFF !important;
-    --mat-datepicker-calendar-header-text-color: #FFF !important;
+    --mat-datepicker-calendar-header-text-color: var(--main-text) !important;
+    --mat-datepicker-calendar-navigation-button-icon-color: var(--main-text) !important;
+    --mat-datepicker-calendar-date-text-color: var(--main-text) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    html.system {
+        // Dark system
+        color-scheme: dark;
+        --main-text: #{v.$light-text} !important;
+        --main-bg: #{v.$darken};
+        --main-bg-shade: #{v.$darken-shade};
+        --main-company-bg: #{v.$secondary-600};
+        --main-company-bg-shade: #{v.$secondary-shade-600};
+
+        //Material
+        --mat-menu-container-color: #{v.$darken-shade} !important;
+        --mat-icon-color: var(--main-text) !important;
+        --mat-menu-item-icon-color: var(--main-text) !important;
+        --mat-sidenav-container-text-color: #8C8A97 !important;
+        --mat-sidenav-content-background-color: var(--main-bg) !important;
+        --mat-checkbox-label-text-color: var(--main-text) !important;
+        --mat-menu-item-label-text-color: var(--main-text) !important;
+        --main-input-placeholder: var(--main-text) !important;
+        --mdc-dialog-container-color: #{v.$darken-shade} !important;
+        --mat-select-placeholder-text-color: var(--main-text) !important;
+        --mat-select-panel-background-color: #{v.$darken-shade} !important;
+        --mat-select-enabled-arrow-color: var(--main-company-bg) !important;
+        --mat-select-enabled-trigger-text-color: var(--main-text) !important;
+        --mat-minimal-pseudo-checkbox-selected-checkmark-color: var(--main-company-bg) !important;
+        --mat-option-selected-state-label-text-color: var(--main-company-bg) !important;
+        --mdc-text-button-label-text-color: var(--main-text) !important;
+        --mdc-filled-button-label-text-color: var(--main-text) !important;
+        --mat-datepicker-calendar-header-text-color: var(--main-text) !important;
+        --mat-datepicker-calendar-navigation-button-icon-color: var(--main-text) !important;
+        --mat-datepicker-calendar-date-text-color: var(--main-text) !important;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    html.system {
+        // Light system
+        color-scheme: light;
+        --main-text: #{v.$darken} !important;
+        --main-bg: #{v.$light-text};
+        --main-bg-shade: #{v.$light-text};
+        --main-company-bg: #{v.$primary-300};
+        --main-company-bg-shade: #{v.$primary-shade-300};
+
+        //Material
+        --mat-menu-container-color: var(--main-bg) !important;
+        --mat-icon-color: var(--main-text) !important;
+        --mat-menu-item-icon-color: var(--main-text) !important;
+        --mat-sidenav-container-text-color: #8C8A97 !important;
+        --mat-sidenav-content-background-color: var(--main-bg) !important;
+        --mat-checkbox-label-text-color: var(--main-text) !important;
+        --mat-menu-item-label-text-color: var(--main-text) !important;
+        --main-input-placeholder: var(--main-text) !important;
+        --mdc-dialog-container-color: #{v.$light-text} !important;
+        --mat-select-placeholder-text-color: var(--main-text) !important;
+        --mat-select-panel-background-color: #{v.$light-text} !important;
+        --mat-select-enabled-arrow-color: var(--main-company-bg) !important;
+        --mat-select-enabled-trigger-text-color: var(--main-text) !important;
+        --mat-minimal-pseudo-checkbox-selected-checkmark-color: var(--main-company-bg) !important;
+        --mat-option-selected-state-label-text-color: var(--main-company-bg) !important;
+        --mdc-text-button-label-text-color: var(--main-text) !important;
+        --mdc-filled-button-label-text-color: var(--main-text) !important;
+        --mat-datepicker-calendar-header-text-color: var(--main-text) !important;
+        --mat-datepicker-calendar-navigation-button-icon-color: var(--main-text) !important;
+        --mat-datepicker-calendar-date-text-color: var(--main-text) !important;
+    }
 }
 
 /* You can add global styles to this file, and also import other style files */

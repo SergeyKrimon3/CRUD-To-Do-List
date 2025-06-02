@@ -5,13 +5,14 @@
 // COLORS
 $primary-300: map.get(theme.$app-primary, 300); //Primary
 $primary-shade-300: color.adjust($primary-300, $lightness: 10%);
-$primary-tint-300: color.adjust($primary-300, $lightness: 10%);
 $secondary-600: map.get(theme.$app-secondary, 600); //Secondary
 $secondary-shade-600: color.adjust($secondary-600, $lightness: 10%);
 $danger: map.get(theme.$app-red, 700); //Red
 $danger-shade: color.adjust($danger, $lightness: 10%);
 $blue-600: map.get(theme.$app-blue, 600); //Blue
 $blue-shade: color.adjust($blue-600, $lightness: 10%);
+$yellow-400: map.get(theme.$app-yellow, 400); //Yellow
+$green-700: map.get(theme.$app-green, 700); //Green
 
 //Light
 $light-text: #fff;
@@ -62,6 +63,10 @@ $colors: map.merge((
         &-shade {
             background-color: $value-shade;
         }
+
+        &-company {
+            background-color: var(--main-company-bg);
+        }
     }
 
     // For color (text and icons). Ex: class="primary-tint"
@@ -77,7 +82,23 @@ $colors: map.merge((
         }
 
         &-main-text {
-            color: var(--main-text);
+            color: var(--main-text) !important;
+        }
+
+        &-main-company-text {
+            color: var(--main-company-bg) !important;
+        }
+
+        &-light {
+            color: $light-text;
+        }
+
+        &-yellow-400 {
+            color: $yellow-400;
+        }
+
+        &-green-700 {
+            color: $green-700;
         }
     }
 
@@ -107,6 +128,10 @@ $colors: map.merge((
 
         &-main-color-stroke ::ng-deep svg * {
             stroke: var(--main-text);
+        }
+
+        &-main-company-color-stroke ::ng-deep svg * {
+            stroke: var(--main-company-bg);
         }
 
         //Fill
