@@ -14,6 +14,9 @@ import { ScreenInitDataOptions } from '../shared/models/init-data-options.model'
 import { BackToTopButtonComponent } from '../shared/components/back-to-top-button/back-to-top-button.component';
 import { PixelsNumbersScrolledPage } from '../shared/services/pixels-numbers-scrolled-page.service';
 import { Router } from '@angular/router';
+import { SnackBarTheme } from '../shared/models/snackbar.model';
+import { CustomSnackbarComponent } from '../shared/components/custom-snackbar/custom-snackbar.component';
+import { TranslationConstants } from '../shared/services/translation.service';
 
 @Component({
 	selector: 'app-tasks',
@@ -48,7 +51,9 @@ export class TasksComponent implements OnInit {
 		private readonly languageService: LanguageService,
 		private readonly dialog: MatDialog,
 		public pixelsNumbersScrolledPage: PixelsNumbersScrolledPage,
-		private readonly router: Router
+		private readonly router: Router,
+		private readonly customSnackbar: CustomSnackbarComponent,
+		private readonly translationConstants: TranslationConstants,
 	) {}
 
 	public ngOnInit(): void {
@@ -124,12 +129,14 @@ export class TasksComponent implements OnInit {
 		this.loadingRequest = true;
 		this.tasksService.deleteTask(taskId).subscribe({
 			next: () => {
+				this.customSnackbar.open(this.translationConstants.translate('tasks.deleted.snackbar.success'), SnackBarTheme.success, 3000);
 				this.loadTasks({ isInitialLoad: false });
 			},
 			complete: () => {
 				this.loadingRequest = false;
 			},
 			error: () => {
+				this.customSnackbar.open(this.translationConstants.translate('snackbar.default.error'), SnackBarTheme.error, 3000);
 				this.loadingRequest = false;
 			}
 		});
@@ -142,12 +149,14 @@ export class TasksComponent implements OnInit {
 		};
 		this.tasksService.updateTaskStatus(taskId, data).subscribe({
 			next: () => {
+				this.customSnackbar.open(this.translationConstants.translate("tasks.status.changed.snackbar.success"), SnackBarTheme.success, 3000);
 				this.loadTasks({ isInitialLoad: false });
 			},
 			complete: () => {
 				this.loadingRequest = false;
 			},
 			error: () => {
+				this.customSnackbar.open(this.translationConstants.translate('snackbar.default.error'), SnackBarTheme.error, 3000);
 				this.loadingRequest = false;
 			}
 		});

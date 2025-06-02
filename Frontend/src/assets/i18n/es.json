@@ -50,9 +50,14 @@
     "tasks.subtitle": "Estás seguro de que deseas eliminar esta tarea?",
     "tasks.displaying": "Mostrando",
     "tasks.name": "tarea",
+    "tasks.deleted.snackbar.success": "¡Tarea eliminada exitosamente!",
+    "tasks.status.changed.snackbar.success": "¡El estado de la tarea se actualizó correctamente!",
     "table.column.description": "Descripción",
     "table.column.create": "Creado",
     "tasks.crud.title.create": "Crear",
     "tasks.crud.title.edit": "Editar",
-    "tasks.crud.title.view": "Ver"
+    "tasks.crud.title.view": "Ver",
+    "tasks.crud.create.snackbar.success": "¡Tarea creada exitosamente!",
+    "tasks.crud.edited.snackbar.success": "¡Tarea editada exitosamente!",
+    "snackbar.default.error": "Hubo un error inesperado, ¡inténtalo de nuevo más tarde!"
 }

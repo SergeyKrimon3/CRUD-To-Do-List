@@ -134,6 +134,14 @@ $colors: map.merge((
             stroke: var(--main-company-bg);
         }
 
+        &-green-700-stroke ::ng-deep svg * {
+            stroke: $green-700 !important;
+        }
+
+        &-danger-stroke ::ng-deep svg * {
+            stroke: $danger !important;
+        }
+
         //Fill
         &-main-color-fill ::ng-deep svg * {
             fill: var(--main-text);

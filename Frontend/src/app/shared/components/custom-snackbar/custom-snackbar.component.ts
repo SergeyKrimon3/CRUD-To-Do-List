@@ -3,12 +3,14 @@ import { MAT_SNACK_BAR_DATA, MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SnackbarDuration, SnackBarTheme } from '../../models/snackbar.model';
+import { MaterialModule } from '../../material/material.module';
 
 @Component({
     selector: 'app-custom-snackbar',
     standalone: true,
     imports: [
         CommonModule,
+        MaterialModule,
         TranslateModule
     ],
     templateUrl: './custom-snackbar.component.html',

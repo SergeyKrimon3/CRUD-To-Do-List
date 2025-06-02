@@ -15,6 +15,7 @@ export const svgIcons: Array<string> = [
     'note-2',
     'rotate-left',
     'sun',
+    'tick-circle',
     'trash'
 ];
 

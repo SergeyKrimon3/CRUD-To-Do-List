@@ -50,9 +50,14 @@
     "tasks.subtitle": "Are you sure you want to delete this task?",
     "tasks.displaying": "Displaying",
     "tasks.name": "task",
+    "tasks.deleted.snackbar.success": "Task deleted successfully!",
+    "tasks.status.changed.snackbar.success": "Task status updated successfully!",
     "table.column.description": "Description",
     "table.column.create": "Created",
     "tasks.crud.title.create": "Create",
     "tasks.crud.title.edit": "Edit",
-    "tasks.crud.title.view": "View"
+    "tasks.crud.title.view": "View",
+    "tasks.crud.create.snackbar.success": "Task created successfully!",
+    "tasks.crud.edited.snackbar.success": "Task edited successfully!",
+    "snackbar.default.error": "There was an unexpected error, please try again later!"
 }

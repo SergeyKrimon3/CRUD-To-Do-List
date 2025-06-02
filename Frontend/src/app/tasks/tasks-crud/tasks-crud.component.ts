@@ -9,6 +9,9 @@ import { TasksService } from '../../shared/services/tasks.service';
 import { TTasks } from '../../shared/models/tasks.model';
 import { EStatusTasks } from '../../shared/enums/status.enum';
 import { EMode } from '../../shared/enums/mode.enum';
+import { CustomSnackbarComponent } from '../../shared/components/custom-snackbar/custom-snackbar.component';
+import { TranslationConstants } from '../../shared/services/translation.service';
+import { SnackBarTheme } from '../../shared/models/snackbar.model';
 
 @Component({
     selector: 'app-tasks-crud',
@@ -36,7 +39,9 @@ export class TasksCrudComponent implements OnInit {
     constructor(
         private readonly activatedRoute: ActivatedRoute,
         private readonly location: Location,
-        private readonly tasksService: TasksService
+        private readonly tasksService: TasksService,
+        private readonly customSnackbar: CustomSnackbarComponent,
+        private readonly translationConstants: TranslationConstants,
     ) {}
 
     public ngOnInit(): void {
@@ -99,28 +104,30 @@ export class TasksCrudComponent implements OnInit {
         if (this.mode === this.eMode.CREATE) {
             this.tasksService.createTask(data).subscribe({
                 next: () => {
-                    console.log('CRIADA');
+                    this.customSnackbar.open(this.translationConstants.translate('tasks.crud.create.snackbar.success'), SnackBarTheme.success, 3000);
                     this.backPage();
-                },
-                error: () => {
-                    this.loading = false;
                 },
                 complete: () => {
                     this.loading = false;
-                }
+                },
+                error: () => {
+                    this.customSnackbar.open(this.translationConstants.translate('snackbar.default.error'), SnackBarTheme.error, 3000);
+                    this.loading = false;
+                },
             });
         } else {
             this.tasksService.updateTaskById(this.taskId, data).subscribe({
                 next: () => {
-                    console.log('EDITADA');
+                    this.customSnackbar.open(this.translationConstants.translate('tasks.crud.edited.snackbar.success'), SnackBarTheme.success, 3000);
                     this.backPage();
-                },
-                error: () => {
-                    this.loading = false;
                 },
                 complete: () => {
                     this.loading = false;
-                }
+                },
+                error: () => {
+                    this.customSnackbar.open(this.translationConstants.translate('snackbar.default.error'), SnackBarTheme.error, 3000);
+                    this.loading = false;
+                },
             });
         }
     }

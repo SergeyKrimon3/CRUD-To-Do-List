@@ -50,9 +50,14 @@
     "tasks.subtitle": "Você tem certeza que deseja excluir esta tarefa?",
     "tasks.displaying": "Exibindo",
     "tasks.name": "tarefa",
+    "tasks.deleted.snackbar.success": "Tarefa excluída com sucesso!",
+    "tasks.status.changed.snackbar.success": "Status da tarefa atualizado com sucesso!",
     "table.column.description": "Descrição",
     "table.column.create": "Criado",
     "tasks.crud.title.create": "Criar",
     "tasks.crud.title.edit": "Editar",
-    "tasks.crud.title.view": "Visualizar"
+    "tasks.crud.title.view": "Visualizar",
+    "tasks.crud.create.snackbar.success": "Tarefa criada com sucesso!",
+    "tasks.crud.edited.snackbar.success": "Tarefa editada com sucesso!",
+    "snackbar.default.error": "Houve um erro inesperado, tente novamente mais tarde!"
 }
