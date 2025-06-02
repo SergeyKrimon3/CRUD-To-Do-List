@@ -1,1 +1,18 @@
 # Youtan
+
+## 🔧 Como rodar o Backend
+
+O backend desse projeto foi feito com [json-server](https://github.com/typicode/json-server), uma ferramenta leve pra simular uma API REST.
+
+### 📝 Pré-requisitos
+
+- Ter o **Node.js** instalado (versão 14 ou superior).
+- Ter o **Yarn** instalado.
+
+### ▶️ Rodando o Backend
+
+1. Abra o terminal.
+2. Navegue até a pasta do backend:
+
+```bash
+cd CRUD-To-Do-List/Backend
