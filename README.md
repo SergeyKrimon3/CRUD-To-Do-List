@@ -46,3 +46,5 @@ Exemplo:
 **Local:** *http://localhost:4200/account/login*
 
 **Network**: *http://192.168.15.8:4200/account/login*
+
+**Observações**: A aplicação não tem autenticação para o login é apenas exibição. Então poderá realizar o seu login com qualquer **CPF** válido e qualquer senha.
