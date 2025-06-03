@@ -12,6 +12,7 @@ import { ApplicationInitializerFactory } from './translation.initializer';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { LocalStorageService } from 'angular-web-storage';
 import { ThemeService } from './shared/services/theme.service';
+import { LanguageService } from './shared/services/language.service';
 
 export function LangHttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
@@ -31,7 +32,7 @@ export const appConfig: ApplicationConfig = {
         {
             provide: APP_INITIALIZER,
             useFactory: ApplicationInitializerFactory,
-            deps: [TranslateService, Injector, LocalStorageService, ThemeService],
+            deps: [TranslateService, Injector, LocalStorageService, LanguageService, ThemeService],
             multi: true
         },
         provideTranslateService({

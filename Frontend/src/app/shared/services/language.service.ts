@@ -49,6 +49,11 @@ export class LanguageService {
 
     private loadInitialLanguage(): string {
         const getLanguageFromStorage: string = this.localStorageService.get(LocalStorageKeys.LANGUAGE) as ELanguage;
+
+        if (!Object.values(ELanguage).includes(getLanguageFromStorage as ELanguage)) {
+            return ELanguage.PT_BR;
+        }
+
         return getLanguageFromStorage;
     }
 
