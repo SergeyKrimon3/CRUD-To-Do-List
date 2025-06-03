@@ -3,13 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LocalStorageService } from 'angular-web-storage';
+import { LocalStorageKeys } from './shared/models/storage-keys.model';
+import { ThemeService } from './shared/services/theme.service';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
     return new TranslateHttpLoader(httpClient);
 }
 
 export function ApplicationInitializerFactory(
-    translate: TranslateService, injector: Injector) {
+    translate: TranslateService, injector: Injector, localStorageService: LocalStorageService, themeService: ThemeService) {
     return async () => {
         await injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
 
@@ -29,6 +32,13 @@ export function ApplicationInitializerFactory(
                 langToUse = 'en';
             }
         }
+
+        if (!translate.getLangs().includes(langToUse)) {
+            langToUse = 'pt-br';
+        }
+
+        localStorageService.set(LocalStorageKeys.LANGUAGE, langToUse);
+        localStorageService.set(LocalStorageKeys.THEME_KEY, themeService.colorTheme());
 
         try {
             await translate.use(langToUse).toPromise();

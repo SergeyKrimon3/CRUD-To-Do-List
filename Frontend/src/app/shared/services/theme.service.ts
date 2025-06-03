@@ -55,6 +55,11 @@ export class ThemeService {
 
     private loadInitialTheme(): string {
         const getThemeFromStorage: string = this.localStorageService.get(LocalStorageKeys.THEME_KEY) as ETheme;
+
+        if (!Object.values(ETheme).includes(getThemeFromStorage as ETheme)) {
+            return ETheme.SYSTEM;
+        }
+
         return getThemeFromStorage;
     }
 

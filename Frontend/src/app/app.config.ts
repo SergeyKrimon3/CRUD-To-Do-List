@@ -10,6 +10,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideTranslateService, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { ApplicationInitializerFactory } from './translation.initializer';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { LocalStorageService } from 'angular-web-storage';
+import { ThemeService } from './shared/services/theme.service';
 
 export function LangHttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
@@ -26,20 +28,19 @@ export const appConfig: ApplicationConfig = {
         provideClientHydration(),
         provideAnimationsAsync(),
         provideHttpClient(),
+        {
+            provide: APP_INITIALIZER,
+            useFactory: ApplicationInitializerFactory,
+            deps: [TranslateService, Injector, LocalStorageService, ThemeService],
+            multi: true
+        },
         provideTranslateService({
             loader: {
                 provide: TranslateLoader,
                 useFactory: LangHttpLoaderFactory,
                 deps: [HttpClient],
             },
-            defaultLanguage: defaultLanguage
         }),
-        {
-            provide: APP_INITIALIZER,
-            useFactory: ApplicationInitializerFactory,
-            deps: [TranslateService, Injector],
-            multi: true
-        },
         {
             provide: MAT_DATE_LOCALE, 
             useValue: defaultLanguage
