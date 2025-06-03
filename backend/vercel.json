@@ -2,17 +2,20 @@
     "version": 2,
     "builds": [
         {
-            "src": "server.js",
+            "src": "backend/server.js",
             "use": "@vercel/node",
             "config": {
-                "includesFiles": ["database.json"]
+                "includeFiles": [
+                    "backend/database.json"
+                ],
+                "installCommand": "cd backend && npm install"
             }
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "server.js"
+            "dest": "backend/server.js"
         }
     ]
 }
