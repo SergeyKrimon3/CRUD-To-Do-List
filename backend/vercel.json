@@ -6,7 +6,7 @@
             "use": "@vercel/node",
             "config": {
                 "includeFiles": [
-                    "backend/database.json"
+                    "database.json"
                 ],
                 "installCommand": "cd backend && npm install"
             }
