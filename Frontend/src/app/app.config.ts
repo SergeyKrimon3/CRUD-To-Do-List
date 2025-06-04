@@ -1,7 +1,7 @@
 import { APP_INITIALIZER, ApplicationConfig, Injector, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgEventBus } from 'ng-event-bus';
 import { TranslationConstants } from './shared/services/translation.service';
@@ -29,7 +29,6 @@ export const appConfig: ApplicationConfig = {
         provideRouter(routes),
         provideClientHydration(),
         provideAnimationsAsync(),
-        provideHttpClient(),
         {
             provide: APP_INITIALIZER,
             useFactory: ApplicationInitializerFactory,
@@ -47,6 +46,12 @@ export const appConfig: ApplicationConfig = {
             provide: MAT_DATE_LOCALE, 
             useValue: defaultLanguage
         },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: NgrokSkipInterceptor,
+            multi: true
+        },
+        provideHttpClient(withInterceptorsFromDi()),
         {
             provide: HTTP_INTERCEPTORS,
             useClass: NgrokSkipInterceptor,

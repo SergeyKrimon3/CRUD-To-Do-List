@@ -12,7 +12,7 @@ export class NgrokSkipInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const modifiedReq = req.clone({
             setHeaders: {
-                'ngrok-skip-browser-warning': 'true'
+                'ngrok-skip-browser-warning': '1231'
             }
         });
 
