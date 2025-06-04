@@ -1,6 +1,6 @@
 const PROXY_CONFIG = {
     '/api': {
-        target: 'http://localhost:3001/',
+        target: 'https://json-server-teal-two.vercel.app/',
         secure: false,
         pathRewrite: {
             '^/api/': ''
