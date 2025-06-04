@@ -14,7 +14,7 @@ export class TasksService {
     ) { }
 
     public getAllTasks(): Observable<ITasks[]> {
-        return this.http.get<ITasks[]>("https://json-server-teal-two.vercel.app/tasks");
+        return this.http.get<ITasks[]>(RestEndpoint.tasks.getAllTasks);
     }
 
     public deleteTask(taskId: string): Observable<ITasks> {
