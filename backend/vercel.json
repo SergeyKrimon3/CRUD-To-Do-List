@@ -2,20 +2,14 @@
     "version": 2,
     "builds": [
         {
-            "src": "server.js",
-            "use": "@vercel/node",
-            "config": {
-                "includeFiles": [
-                    "database.json"
-                ],
-                "installCommand": "cd backend && npm install"
-            }
+            "src": "api/index.js",
+            "use": "@vercel/node"
         }
     ],
-    "rewrites": [
+    "routes": [
         {
-            "source": "/(.*)",
-            "destination": "/"
+            "src": "/(.*)",
+            "dest": "/api/index.js"
         }
     ]
 }
