@@ -22,7 +22,7 @@ export class TasksService {
     }
 
     public updateTaskStatus(taskId: string, status: TTaskStatus): Observable<ITasks> {
-        return this.http.patch<ITasks>(RestEndpoint.tasks.updateStatusTask(taskId), status ).pipe(delay(2000));
+        return this.http.patch<ITasks>(RestEndpoint.tasks.updateStatusTask(taskId), { status } ).pipe(delay(2000));
     }
 
     public createTask(task: TTasks): Observable<TTasks> {
