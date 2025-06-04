@@ -1,6 +1,6 @@
 const PROXY_CONFIG = {
     '/api': {
-        target: 'http://localhost:3001/',
+        target: 'https://7fd4-2804-1b3-a9c0-2e86-b365-3cf3-ffb4-963b.ngrok-free.app/',
         secure: false,
         pathRewrite: {
             '^/api/': ''
