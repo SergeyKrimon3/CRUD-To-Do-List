@@ -1,6 +1,6 @@
 const PROXY_CONFIG = {
     '/api': {
-        target: 'https://json-server-teal-two.vercel.app',
+        target: 'https://3597-2804-1b3-a9c0-2e86-b365-3cf3-ffb4-963b.ngrok-free.app/',
         secure: false,
         pathRewrite: {
             '^/api/': ''
