@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { delay, Observable } from 'rxjs';
 import { RestEndpoint } from '../../../constants/rest-endpoint.cosntants';
-import { ITasks, TTasks, TTaskStatus } from '../models/tasks.model';
+import { ITasks, TTasks } from '../models/tasks.model';
+import { EStatusTasks } from '../enums/status.enum';
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +22,7 @@ export class TasksService {
         return this.http.delete<ITasks>(RestEndpoint.tasks.deleteTask(taskId)).pipe(delay(2000));
     }
 
-    public updateTaskStatus(taskId: string, status: TTaskStatus): Observable<ITasks> {
+    public updateTaskStatus(taskId: string, status: EStatusTasks): Observable<ITasks> {
         return this.http.patch<ITasks>(RestEndpoint.tasks.updateStatusTask(taskId), { status } ).pipe(delay(2000));
     }
 

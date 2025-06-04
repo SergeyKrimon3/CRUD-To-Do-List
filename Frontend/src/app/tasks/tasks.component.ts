@@ -144,10 +144,7 @@ export class TasksComponent implements OnInit {
 
 	public updateTaskStatus(taskId: string, status: EStatusTasks): void {
 		this.loadingRequest = true;
-		const data: TTaskStatus = {
-			status: status
-		};
-		this.tasksService.updateTaskStatus(taskId, data).subscribe({
+		this.tasksService.updateTaskStatus(taskId, status).subscribe({
 			next: () => {
 				this.customSnackbar.open(this.translationConstants.translate("tasks.status.changed.snackbar.success"), SnackBarTheme.success, 3000);
 				this.loadTasks({ isInitialLoad: false });
